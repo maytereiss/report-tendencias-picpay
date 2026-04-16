@@ -1,0 +1,1220 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Report de Tendências PicPay — Ed. 01 · Mar/Abr 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#07080E;--card:rgba(255,255,255,.048);--cardh:rgba(255,255,255,.082);
+  --bord:rgba(255,255,255,.07);--bordh:rgba(255,255,255,.16);
+  --text:#ECEDF4;--muted:#72758C;--dim:#1E2030;
+  --g:#21C25E;--pk:#FF4F8B;--am:#F5A623;--bl:#4F8BFF;
+  --pu:#A78BFA;--cy:#2DD4BF;--rd:#F87171;--or:#FB923C;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;-webkit-font-smoothing:antialiased;line-height:1.6;font-size:15px}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;height:52px;padding:0 24px;display:flex;align-items:center;justify-content:space-between;background:rgba(7,8,14,.96);backdrop-filter:blur(24px);border-bottom:1px solid var(--bord);gap:12px}
+.brand{font-size:11px;font-weight:800;letter-spacing:.17em;text-transform:uppercase;color:var(--g);flex-shrink:0}
+.brand em{color:var(--muted);font-style:normal;font-weight:400}
+.nav-editions{display:flex;gap:5px;overflow-x:auto;scrollbar-width:none}
+.nav-editions::-webkit-scrollbar{display:none}
+.ebtn{font-size:9.5px;font-weight:700;padding:3px 10px;border-radius:100px;border:1px solid var(--bord);background:transparent;color:var(--muted);cursor:pointer;transition:all .2s;white-space:nowrap;text-decoration:none;display:inline-flex;align-items:center}
+.ebtn:hover,.ebtn.active{background:var(--g);color:#000;border-color:var(--g)}
+.dots{display:flex;gap:6px;align-items:center;flex-shrink:0}
+.dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.15);border:none;cursor:pointer;transition:all .3s;padding:0}
+.dot.on{transform:scale(1.7);background:var(--g)}
+
+section{min-height:100vh;padding:88px 32px 80px;display:flex;flex-direction:column;justify-content:center}
+.w{max-width:1100px;margin:0 auto;width:100%}
+
+/* HERO */
+#s0{position:relative;overflow:hidden}
+#s0::before{content:'';position:absolute;top:-200px;left:-160px;width:600px;height:600px;background:radial-gradient(circle,rgba(33,194,94,.09) 0%,transparent 68%);pointer-events:none;animation:gl 7s ease-in-out infinite}
+#s0::after{content:'';position:absolute;bottom:-140px;right:-100px;width:400px;height:400px;background:radial-gradient(circle,rgba(255,79,139,.06) 0%,transparent 68%);pointer-events:none;animation:gl 9s ease-in-out infinite 3s}
+@keyframes gl{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.18);opacity:.55}}
+.hlabel{font-size:10.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--g);margin-bottom:18px}
+.htitle{font-size:clamp(38px,5.8vw,68px);font-weight:900;letter-spacing:-.04em;line-height:1.04;margin-bottom:18px}
+.hacc{background:linear-gradient(135deg,var(--g),#0FA449);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hsub{font-size:15px;color:var(--muted);max-width:540px;line-height:1.82;margin-bottom:48px}
+.hrow{display:flex;gap:40px;flex-wrap:wrap;margin-bottom:56px}
+.hst{display:flex;flex-direction:column;gap:3px}
+.hn{font-size:26px;font-weight:800;background:linear-gradient(135deg,var(--g),#0FA449);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hl{font-size:11px;color:var(--muted);font-weight:500}
+.hdiv{height:1px;background:var(--bord);margin:44px 0}
+.slabel{display:flex;align-items:center;gap:12px;margin-bottom:20px}
+.slabel span{font-size:10px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+.slabel::after{content:'';flex:1;height:1px;background:var(--bord)}
+
+/* VOCAB */
+.vocab-tier{margin-bottom:32px}
+.tier-header{display:flex;align-items:center;gap:10px;margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid var(--bord)}
+.tier-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.tier-name{font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase}
+.tier-sub{font-size:12px;color:var(--muted);margin-left:4px}
+.vocab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px}
+.vcard{background:var(--card);border:1px solid var(--bord);border-radius:13px;padding:15px 17px;transition:all .25s;position:relative}
+.vcard:hover{background:var(--cardh);border-color:var(--bordh);transform:translateY(-2px)}
+.vcard.hot{border-left:3px solid var(--rd)}
+.vcard.warm{border-left:3px solid var(--am)}
+.vcard.move{border-left:3px solid var(--pu)}
+.vbadge{position:absolute;top:11px;right:11px;font-size:9px;font-weight:800;padding:2px 7px;border-radius:100px;letter-spacing:.08em;text-transform:uppercase}
+.b-hot{background:rgba(248,113,113,.15);color:var(--rd)}
+.b-warm{background:rgba(245,166,35,.12);color:var(--am)}
+.b-move{background:rgba(167,139,250,.15);color:var(--pu)}
+.vterm{font-size:13.5px;font-weight:800;margin-bottom:5px;display:flex;align-items:center;gap:8px;padding-right:60px}
+.vdot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.vdef{font-size:12px;color:var(--muted);line-height:1.58}
+.vdef strong{color:var(--text)}
+.vex{font-size:11px;color:rgba(114,117,140,.65);margin-top:6px;font-style:italic;padding-left:13px;border-left:2px solid var(--dim)}
+.vsource{font-size:10px;margin-top:7px;display:flex;align-items:center;gap:4px}
+.vsource a{color:var(--g);text-decoration:none;font-weight:600}
+.vsource a:hover{text-decoration:underline}
+
+/* TRENDS */
+.ey{display:inline-flex;align-items:center;gap:9px;font-size:10px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:22px}
+.ey::before{content:'';display:block;width:3px;height:12px;border-radius:2px;background:var(--g)}
+.tag{display:inline-flex;align-items:center;padding:4px 12px;border-radius:100px;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:12px}
+.tg{background:rgba(33,194,94,.12);color:var(--g)}.tp{background:rgba(255,79,139,.12);color:var(--pk)}
+.ta{background:rgba(245,166,35,.12);color:var(--am)}.tb{background:rgba(79,139,255,.12);color:var(--bl)}
+.tpu{background:rgba(167,139,250,.12);color:var(--pu)}.tc{background:rgba(45,212,191,.12);color:var(--cy)}
+.tr{background:rgba(248,113,113,.12);color:var(--rd)}.to{background:rgba(251,146,60,.12);color:var(--or)}
+.thead{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:start;margin-bottom:32px}
+.tnum{font-size:72px;font-weight:900;line-height:1;letter-spacing:-.06em;opacity:.06;align-self:center}
+.ttitle{font-size:clamp(21px,2.8vw,31px);font-weight:800;letter-spacing:-.025em;line-height:1.15;margin-bottom:10px}
+.tsub{font-size:14px;color:var(--muted);font-style:italic;line-height:1.7;max-width:680px}
+
+/* BOXES */
+.fbox{position:relative;overflow:hidden;border-radius:17px;border:1px solid var(--bordh);background:linear-gradient(145deg,rgba(255,255,255,.045),rgba(255,255,255,.018));padding:26px 30px;margin-bottom:22px}
+.fbar{position:absolute;top:0;left:0;right:0;height:2px}
+.flbl{font-size:10px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;margin-bottom:13px}
+.ftxt{font-size:14px;line-height:1.76;color:rgba(236,237,244,.88)}
+.ftxt strong{color:var(--text);font-weight:700}
+.ftxt a{color:var(--g);text-decoration:none}
+.ftxt a:hover{text-decoration:underline}
+.fquote{margin-top:15px;padding:13px 18px;background:rgba(255,255,255,.04);border-radius:10px;border-left:3px solid;font-size:13.5px;font-style:italic;font-weight:600;line-height:1.55}
+.source{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.04);border:1px solid var(--bord);border-radius:100px;padding:4px 11px;font-size:10px;color:var(--muted);font-weight:600;margin-top:13px;text-decoration:none;transition:all .2s}
+.source:hover{border-color:var(--g);color:var(--g)}
+.source a{color:inherit;text-decoration:none}
+
+/* CANAIS */
+.channels{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.ch{display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border-radius:100px;font-size:10px;font-weight:700}
+.ch-podcast{background:rgba(251,146,60,.12);color:var(--or)}
+.ch-radio{background:rgba(45,212,191,.12);color:var(--cy)}
+.ch-trendspace{background:rgba(167,139,250,.12);color:var(--pu)}
+.ch-casapatrao{background:rgba(255,79,139,.12);color:var(--pk)}
+.ch-kwai{background:rgba(248,113,113,.12);color:var(--rd)}
+.ch-wfi{background:rgba(79,139,255,.12);color:var(--bl)}
+.ch-tvminuto{background:rgba(33,194,94,.12);color:var(--g)}
+.ch-social{background:rgba(245,166,35,.12);color:var(--am)}
+.ch-perf{background:rgba(114,117,140,.12);color:var(--muted)}
+
+/* SROW / SGRID */
+.srow{display:grid;grid-template-columns:1fr 1fr;gap:13px;margin-bottom:22px}
+.sblk{background:var(--card);border:1px solid var(--bord);border-radius:14px;padding:20px 22px;transition:all .28s}
+.sblk:hover{background:var(--cardh);border-color:var(--bordh);transform:translateY(-2px)}
+.slbl{font-size:9.5px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;margin-bottom:9px}
+.stxt{font-size:13px;line-height:1.7;color:var(--muted)}
+.stxt strong{color:var(--text);font-weight:600}
+.stxt a{color:var(--g);text-decoration:none}
+.sgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:11px;margin-bottom:8px}
+.sc{background:var(--card);border:1px solid var(--bord);border-radius:13px;padding:16px 18px;transition:all .28s}
+.sc:hover{background:var(--cardh);border-color:var(--bordh);transform:translateY(-3px)}
+.sn{font-size:10px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;margin-bottom:8px;display:flex;align-items:center;gap:7px}
+.sdot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.sb{font-size:12.5px;color:var(--muted);line-height:1.65}
+.sb strong{color:var(--text);font-weight:600}
+.sa{margin-top:10px;padding:8px 11px;border-radius:8px;font-size:11px;font-weight:700;line-height:1.4}
+
+/* MEDIA (cards clicáveis — sem iframe para evitar erros de bloqueio) */
+.media-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;margin:16px 0}
+.media-card{background:var(--card);border:1px solid var(--bord);border-radius:13px;overflow:hidden;text-decoration:none;display:block;transition:all .25s}
+.media-card:hover{background:var(--cardh);border-color:var(--bordh);transform:translateY(-2px)}
+.media-thumb{width:100%;height:160px;object-fit:cover;display:block;background:var(--dim)}
+.media-thumb-placeholder{width:100%;height:160px;background:linear-gradient(135deg,var(--dim),rgba(255,255,255,.03));display:flex;align-items:center;justify-content:center;font-size:32px}
+.media-label{padding:11px 14px;font-size:11.5px;color:var(--muted);font-weight:600;display:flex;align-items:center;gap:8px}
+.media-label span{color:var(--text)}
+.play-icon{width:28px;height:28px;background:var(--rd);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:11px}
+
+/* TRENDS TABS */
+.week-tabs{display:flex;gap:6px;margin-bottom:20px;flex-wrap:wrap}
+.wtab{font-size:10px;font-weight:700;padding:5px 14px;border-radius:100px;border:1px solid var(--bord);color:var(--muted);cursor:pointer;transition:all .25s;background:transparent}
+.wtab.on{background:var(--g);color:#000;border-color:var(--g)}
+.wpanel{display:none}
+.wpanel.on{display:block}
+.tgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:10px}
+.tcard{background:var(--card);border:1px solid var(--bord);border-radius:12px;padding:13px 16px;display:flex;gap:12px;align-items:flex-start}
+.trank{font-size:18px;font-weight:900;min-width:26px;line-height:1;flex-shrink:0}
+.ttopic{font-size:13px;font-weight:800;margin-bottom:3px}
+.tctx{font-size:11.5px;color:var(--muted);line-height:1.5}
+
+/* RADAR */
+.cal-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px;margin:16px 0}
+.rcard{background:var(--card);border:1px solid var(--bord);border-radius:12px;padding:13px 15px}
+.rtype{font-size:9.5px;font-weight:800;letter-spacing:.15em;text-transform:uppercase;margin-bottom:5px}
+.rtitle{font-size:13px;font-weight:700;margin-bottom:4px}
+.rdesc{font-size:11.5px;color:var(--muted);line-height:1.5}
+.rdesc a{color:var(--g);text-decoration:none}
+.rhook{font-size:11px;font-weight:600;margin-top:7px;padding:6px 10px;border-radius:7px;background:rgba(255,255,255,.04)}
+.rstatus{display:inline-flex;align-items:center;gap:4px;font-size:9.5px;font-weight:700;margin:5px 0;padding:2px 8px;border-radius:100px}
+.rs-hot{background:rgba(248,113,113,.12);color:var(--rd)}
+.rs-ok{background:rgba(33,194,94,.10);color:var(--g)}
+.rs-cold{background:rgba(114,117,140,.12);color:var(--muted)}
+.rs-soon{background:rgba(79,139,255,.12);color:var(--bl)}
+
+/* MINI */
+.mini2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px}
+.mini3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px}
+.mcard{border-radius:13px;padding:17px 19px}
+
+/* TABLE */
+.ftable{width:100%;border-collapse:collapse;margin:14px 0}
+.ftable th{padding:8px 13px;border-bottom:1px solid var(--bordh);font-size:10px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);text-align:left}
+.ftable td{padding:9px 13px;border-bottom:1px solid var(--bord);font-size:13px;vertical-align:top;line-height:1.55}
+.ftable td:first-child{font-weight:700;color:var(--text)}
+.ftable td:last-child{color:var(--muted)}
+.ftable tr:last-child td{border-bottom:none}
+
+/* CLOSING */
+.cgrid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+.ctitle{font-size:clamp(26px,3.8vw,42px);font-weight:900;letter-spacing:-.035em;line-height:1.08;margin-bottom:14px}
+.cdesc{font-size:14px;color:var(--muted);line-height:1.78;margin-bottom:28px}
+.cmgrid{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+.cmc{background:var(--card);border:1px solid var(--bord);border-radius:12px;padding:15px 17px}
+.cn{font-size:20px;font-weight:800;background:linear-gradient(135deg,var(--g),#0FA449);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.cl{font-size:11px;color:var(--muted);margin-top:4px}
+.cta-btn{display:inline-flex;align-items:center;gap:9px;background:linear-gradient(135deg,var(--g),#0FA449);color:#000;font-weight:800;font-size:13px;padding:12px 24px;border-radius:100px;text-decoration:none;letter-spacing:.04em;box-shadow:0 4px 20px rgba(33,194,94,.28);transition:all .3s}
+.cta-btn:hover{box-shadow:0 6px 28px rgba(33,194,94,.44);transform:translateY(-2px)}
+
+.f{opacity:0;transform:translateY(20px);transition:opacity .5s ease,transform .5s ease}
+.f.on{opacity:1;transform:translateY(0)}
+.d1{transition-delay:.07s}.d2{transition-delay:.15s}.d3{transition-delay:.23s}.d4{transition-delay:.31s}
+
+footer{background:rgba(0,0,0,.3);border-top:1px solid var(--bord);padding:22px 32px;text-align:center;font-size:11px;color:var(--muted)}
+footer a{color:var(--g);text-decoration:none}
+
+@media(max-width:900px){
+  .sgrid,.mini3{grid-template-columns:repeat(2,1fr)}
+  .srow,.mini2,.cgrid,.cmgrid,.thead{grid-template-columns:1fr}
+  .tnum{display:none}
+  .hrow{gap:22px}
+  .nav-editions{display:none}
+}
+@media(max-width:560px){section{padding:80px 20px 60px}.sgrid{grid-template-columns:1fr}.fbox{padding:20px 18px}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="brand">PicPay <em>· Tendências</em></div>
+  <div class="nav-editions">
+    <a class="ebtn active" href="report-tendencias-picpay.html">Ed. 01 · Mar/Abr 2026</a>
+    <span class="ebtn" style="opacity:.4;cursor:default">Ed. 02 · Mai 2026 — em breve</span>
+  </div>
+  <div class="dots" id="dots"></div>
+</nav>
+
+<!-- ══ HERO ══ -->
+<section id="s0">
+<div class="w">
+  <div class="hlabel f">Edição 01 · Mar/Abr 2026 · Quinzenal · Uso interno</div>
+  <h1 class="htitle f d1">O que o Brasil<br><span class="hacc">está processando agora.</span></h1>
+  <p class="hsub f d2">4 semanas de trending real, glossário, radar cultural, 14 tendências inovadoras. Para quem precisa de inteligência, não de lista.</p>
+  <div class="hrow f d3">
+    <div class="hst"><span class="hn">4</span><span class="hl">Semanas de dados reais</span></div>
+    <div class="hst"><span class="hn">14</span><span class="hl">Tendências com fontes</span></div>
+    <div class="hst"><span class="hn">15d</span><span class="hl">Próxima edição</span></div>
+  </div>
+
+  <!-- ══ GLOSSÁRIO ══ -->
+  <div class="hdiv f d4"></div>
+  <div class="slabel f d4"><span>Glossário cultural — ordenado por temperatura</span></div>
+
+  <!-- SUPER QUENTE -->
+  <div class="vocab-tier f d4">
+    <div class="tier-header">
+      <span class="tier-dot" style="background:var(--rd)"></span>
+      <span class="tier-name" style="color:var(--rd)">Super Quente — Vocab</span>
+      <span class="tier-sub">termos que explodiram nos últimos dias e dominam a conversa agora</span>
+    </div>
+    <div class="vocab-grid">
+
+      <div class="vcard hot">
+        <span class="vbadge b-hot">🔥 agora</span>
+        <div class="vterm" style="color:var(--rd)"><span class="vdot" style="background:var(--rd)"></span>#CreaoAI</div>
+        <div class="vdef">Hashtag orgânica brasileira — mistura de "criação" com "IA". Surgiu espontaneamente no X/Twitter BR em 31/mar/2026 e ficou em trending por 10h seguidas. Usada para celebrar criatividade com IA e criticar conteúdo gerado sem esforço humano. Um dos sinais mais interessantes da semana: a internet brasileira nomeando sozinha o que sente.</div>
+        <div class="vex">"Essa arte é #CreaoAI ou fez mesmo?"</div>
+        <div class="vsource">↗ <a href="https://getdaytrends.com/brazil/2026-03-31/14/" target="_blank">getdaytrends.com — trending 31/mar/2026, 10h contínuas</a></div>
+      </div>
+
+      <div class="vcard hot">
+        <span class="vbadge b-hot">🔥 agora</span>
+        <div class="vterm" style="color:var(--rd)"><span class="vdot" style="background:var(--rd)"></span>IA Slop</div>
+        <div class="vdef">Conteúdo gerado por IA em quantidade industrial, sem curadoria, sem propósito além de ocupar espaço. "Slop" = comida ruim servida em balde. Surgiu em 2024 quando pesquisadores identificaram o Facebook sendo inundado por imagens IA (Jesus de areia, bebês em situações absurdas) com mais engajamento que posts reais. Em 2026 o debate chegou ao Brasil com força — a hashtag #CreaoAI é a reação brasileira a esse fenômeno.</div>
+        <div class="vex">"Esse perfil só posta IA slop." "Até as thumbnails são slop agora."</div>
+        <div class="vsource">↗ <a href="https://www.theguardian.com/technology/artificialintelligenceai" target="_blank">The Guardian, mai/2024 — origem do fenômeno</a> · <a href="https://getdaytrends.com/brazil/2026-03-31/14/" target="_blank">#CreaoAI trending X/BR 31/mar/2026</a></div>
+      </div>
+
+      <div class="vcard hot">
+        <span class="vbadge b-hot">🔥 agora</span>
+        <div class="vterm" style="color:var(--rd)"><span class="vdot" style="background:var(--rd)"></span>Burnout</div>
+        <div class="vdef">Esgotamento total — mental, físico e emocional. Não é preguiça, não é fraqueza. A NR-1 (Norma Regulamentadora 1), que obriga empresas a mapear riscos psicossociais, entrou em vigor em jan/2025. Resultado: o tema saiu do consultório e foi para a conversa pública. Em 31/mar/2026 entrou no trending do X/Twitter BR sem evento-gatilho específico — sinal de conversa latente e permanente.</div>
+        <div class="vex">"Não é preguiça — é burnout." "A NR-1 trouxe o tema para a mesa corporativa."</div>
+        <div class="vsource">↗ <a href="https://getdaytrends.com/brazil/2026-03-31/14/" target="_blank">X/Twitter BR trending 31/mar/2026</a> · <a href="https://www.gov.br/trabalho-e-emprego/pt-br/assuntos/inspecao-do-trabalho/normas-regulamentadoras/nr-1-atualizacao-2023.pdf" target="_blank">NR-1 — Ministério do Trabalho</a></div>
+      </div>
+
+      
+
+      <div class="vcard hot">
+        <span class="vbadge b-hot">🔥 agora</span>
+        <div class="vterm" style="color:var(--rd)"><span class="vdot" style="background:var(--rd)"></span>FOMO / JOMO</div>
+        <div class="vdef"><strong>FOMO</strong> (Fear Of Missing Out) em 2026 evoluiu de "medo de perder a festa" para ansiedade de trajetória — todo mundo parece avançar mais rápido. O LinkedIn é o principal gerador. <strong>JOMO</strong> (Joy Of Missing Out) é a resposta: satisfação ativa de não estar em lugar nenhum além de onde você está. Em 2026, "ficar em casa" deixou de ser algo a esconder.</div>
+        <div class="vex">"JOMO total esse fim de semana." "FOMO é o algoritmo trabalhando."</div>
+        <div class="vsource">↗ <a href="https://hbr.org/search?term=FOMO" target="_blank">Harvard Business Review — FOMO</a> · <a href="https://ads.tiktok.com/business/pt-BR/next" target="_blank">TikTok What's Next 2026 — Chá de Realidade</a></div>
+      </div>
+
+      <div class="vcard hot">
+        <span class="vbadge b-hot">🔥 agora</span>
+        <div class="vterm" style="color:var(--rd)"><span class="vdot" style="background:var(--rd)"></span>Farmar aura / -500 de aura</div>
+        <div class="vdef">Acumular carisma através de ações deliberadamente frias e compostas — de games (farming = executar ações para ganhar recursos). A imagem fundadora: Rayyan Arkan Dikha, o "boat kid" indonésio, dançando na proa de um barco em movimento com expressão completamente neutra. Dictionary.com formalizou o termo em out/2025. O lado negativo: "-500 de aura" para qualquer tropeço público.</div>
+        <div class="vex">"Entrou na reunião farmando aura." "Mandou áudio no grupo errado: -500 de aura."</div>
+        <div class="vsource">↗ <a href="https://www.dictionary.com/e/slang/aura-farming/" target="_blank">Dictionary.com — definição formal, out/2025</a></div>
+      </div>
+
+      <div class="vcard hot">
+        <span class="vbadge b-hot">🔥 agora</span>
+        <div class="vterm" style="color:var(--rd)"><span class="vdot" style="background:var(--rd)"></span>Performar</div>
+        <div class="vdef">Curar a própria imagem conscientemente — no LinkedIn, nas redes, nos relacionamentos. Não é fingir: é montar o personagem sabendo que está fazendo. "Performar autenticidade" — criar conteúdo de bastidores cuidadosamente montado para parecer espontâneo — é a contradição central de 2026.</div>
+        <div class="vex">"Ele não tá mentindo — ele tá performando que é bom parceiro."</div>
+        <div class="vsource">↗ <a href="https://www.dicionarioinformal.com.br/performar/" target="_blank">Dicionário Informal — 10 definições registradas</a> · NR-1 (jan/2025)</div>
+      </div>
+
+      <div class="vcard hot">
+        <span class="vbadge b-hot">🔥 agora</span>
+        <div class="vterm" style="color:var(--rd)"><span class="vdot" style="background:var(--rd)"></span>Serving</div>
+        <div class="vdef">Da cultura de competições de dança e performance LGBTQ+ dos anos 1980-90 em Nova York — "serve" era entregar a vibe de uma categoria no palco. Virou mainstream pelo RuPaul's Drag Race e explodiu no TikTok. "Serving [adjetivo]" = você está emanando exatamente aquela energia de forma intencional. É performance consciente — diferente de "ser", é "estar entregando no momento".</div>
+        <div class="vex">"Serving riqueza discreta nesse look." "Ela tava servindo executiva sênior hoje."</div>
+        <div class="vsource">↗ <a href="https://ads.tiktok.com/business/pt-BR/next" target="_blank">TikTok What's Next 2026</a> · origem: cultura ballroom LGBTQ+ Nova York, anos 1980</div>
+      </div>
+
+      <div class="vcard hot">
+        <span class="vbadge b-hot">🔥 vocab</span>
+        <div class="vterm" style="color:var(--rd)"><span class="vdot" style="background:var(--rd)"></span>NPC / Lore / Brain rot</div>
+        <div class="vdef"><strong>NPC</strong> (Non-Playable Character) = personagem de jogo sem agência, segue roteiro — crítica para pessoas no piloto automático. <strong>Lore</strong> = universo de fundo acumulado de qualquer situação complexa com muita história por trás. <strong>Brain rot</strong> = Palavra do Ano Oxford 2024 — estado de quem consumiu horas de conteúdo idiota; também o próprio conteúdo absurdo e viciante.</div>
+        <div class="vex">"A reunião toda era NPC puro." "O lore desse casal é extenso." "4h no TikTok — brain rot total."</div>
+        <div class="vsource">↗ <a href="https://languages.oup.com/word-of-the-year/" target="_blank">Oxford Word of the Year 2024 — "brain rot"</a></div>
+      </div>
+
+      <div class="vcard hot">
+        <span class="vbadge b-hot">🔥 agora</span>
+        <div class="vterm" style="color:var(--rd)"><span class="vdot" style="background:var(--rd)"></span>Delulu</div>
+        <div class="vdef">Abreviação de "delusional" (iludido). Surgiu nos fandoms de K-pop e virou autoironia carinhosa para qualquer crença improvável. "Delulu is the solulu" (ser iludido é a solução) é o refrão. Em 2026 ainda circula forte — especialmente sobre Copa 2026, carreira e relacionamentos.</div>
+        <div class="vex">"Sou delulu de achar que o Brasil vai ganhar a Copa."</div>
+        <div class="vsource">↗ <a href="https://ads.tiktok.com/business/pt-BR/next" target="_blank">TikTok What's Next 2026 — mencionado como hashtag em declínio</a></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- MOVIMENTOS EM ALTA -->
+  <div class="vocab-tier f">
+    <div class="tier-header">
+      <span class="tier-dot" style="background:var(--pu)"></span>
+      <span class="tier-name" style="color:var(--pu)">Movimentos em Alta</span>
+      <span class="tier-sub">comportamentos e fenômenos com impacto contínuo no mundo</span>
+    </div>
+    <div class="vocab-grid">
+
+      <div class="vcard move">
+        <span class="vbadge b-move">movimento</span>
+        <div class="vterm" style="color:var(--pu)"><span class="vdot" style="background:var(--pu)"></span>DITADURA NUNCA MAIS</div>
+        <div class="vdef">Trending recorrente todo 31 de março — aniversário do Golpe Militar de 1964. Em 2026, com o julgamento de Bolsonaro em andamento, o peso é diferente. Não é só pauta histórica: é termômetro político ativo. Quando aparece no trending sem evento-gatilho, a tensão democrática está ligada.</div>
+        <div class="vsource">↗ <a href="https://getdaytrends.com/brazil/2026-03-31/14/" target="_blank">X/Twitter BR trending 31/mar/2026</a></div>
+      </div>
+
+      <div class="vcard move">
+        <span class="vbadge b-move">movimento</span>
+        <div class="vterm" style="color:var(--pu)"><span class="vdot" style="background:var(--pu)"></span>Esposa tradicional</div>
+        <div class="vdef">Mulher que rejeita carreira e feminismo e escolhe ser dona de casa como identidade — mas documenta tudo para o Instagram com fotos produzidas de pão feito em casa, mesa posta e avental impecável. O paradoxo: é uma escolha performada para o algoritmo com tanta dedicação quanto o que critica. O avental é comprado na Amazon.</div>
+        <div class="vex">Ironia central: a esposa tradicional tem mais seguidores que a feminista.</div>
+        <div class="vsource">↗ <a href="https://www.pewresearch.org/social-trends/" target="_blank">Pew Research — dinâmicas de gênero e trabalho</a></div>
+      </div>
+
+      <div class="vcard move">
+        <span class="vbadge b-move">movimento</span>
+        <div class="vterm" style="color:var(--pu)"><span class="vdot" style="background:var(--pu)"></span>Manosphere</div>
+        <div class="vdef">Ecossistema de comunidades masculinas organizadas em torno de ressentimento com o feminismo — incels, pílula vermelha, MGTOW, coaches de masculinidade. O caminho algorítmico: fitness → sucesso → misoginia estruturada. Cresceu no Brasil em 2024-2025 como reação ao avanço de pautas feministas. Conecta diretamente com a Lei da Misoginia aprovada em março/2026.</div>
+        <div class="vex">"Ele caiu na espiral da manosphere." Pipeline: academia → coach → ódio.</div>
+        <div class="vsource">↗ <a href="https://www12.senado.leg.br/noticias/ultimas" target="_blank">Senado — contexto Lei da Misoginia, mar/2026</a></div>
+      </div>
+
+      <div class="vcard move">
+        <span class="vbadge b-move">movimento</span>
+        <div class="vterm" style="color:var(--pu)"><span class="vdot" style="background:var(--pu)"></span>Magreza extrema como estética</div>
+        <div class="vdef">Estética de magreza óssea — pele pálida, ossos visíveis — que dominou nos anos 1990 com Kate Moss e Calvin Klein. Voltou às passarelas em 2023 e ao TikTok BR em 2024-2025, acelerada pela visibilidade de corpos que emagreceram rapidamente com Ozempic e Mounjaro. O debate: padrão de beleza ou efeito colateral de medicamento normalizado?</div>
+        <div class="vex">Tensão com o movimento de aceitação corporal que dominou 2020-2023.</div>
+        <div class="vsource">↗ <a href="https://exame.com/casual/vitamina-creatina-e-whey-os-suplementos-sao-mesmo-essenciais-para-a-saude/" target="_blank">Exame/Casual — suplementos e corpo, 31/mar/2026</a></div>
+      </div>
+
+      <div class="vcard move">
+        <span class="vbadge b-move">movimento</span>
+        <div class="vterm" style="color:var(--pu)"><span class="vdot" style="background:var(--pu)"></span>Dad-core</div>
+        <div class="vdef">A Geração Z roubando o guarda-roupa dos anos 1990-2000 dos pais. Bermudas jeans largas, New Balance clássico, camisetas oversized de banda, meias altas com tênis. Quanto mais parece que você não ligou para o look, mais tempo você gastou escolhendo. New Balance ficou em trending orgânico no X/BR em 17/mar/2026 — sem nenhuma campanha paga.</div>
+        <div class="vex">"Ele tá todo dad-core hoje." New Balance trending orgânico = sintoma direto.</div>
+        <div class="vsource">↗ <a href="https://getdaytrends.com/brazil/2026-03-17/14/" target="_blank">New Balance trending X/BR 17/mar/2026</a> · <a href="https://exame.com/casual/de-olho-na-copa-do-mundo-adidas-relanca-classico-inspirado-em-paises/" target="_blank">Adidas Handball Spezial Copa 2026</a></div>
+      </div>
+
+      <div class="vcard move">
+        <span class="vbadge b-move">movimento</span>
+        <div class="vterm" style="color:var(--pu)"><span class="vdot" style="background:var(--pu)"></span>Brasilcore (S) vs Brazilcore (Z)</div>
+        <div class="vdef"><strong>Brasilcore (S)</strong> = o Brasil bruto e real — churrasco de domingo, futebol de pelada, funk de baile, periferia, samba de raiz. <strong>Brazilcore (Z)</strong> = o Brasil que o exterior romanticiza — natureza, praias, Carnaval fotogênico, diversidade estilizada. O "Z" é postura: celebrar a cultura sem precisar defender o Estado. Brasil é o 8º maior mercado de música global — +14% ao ano.</div>
+        <div class="vex">"Essa campanha é puro brazilcore." "Churrasco de família é Brasilcore real."</div>
+        <div class="vsource">↗ <a href="https://www.ifpi.org/global-music-report/" target="_blank">IFPI Global Music Report 2025</a></div>
+      </div>
+
+      <div class="vcard move">
+        <span class="vbadge b-move">movimento</span>
+        <div class="vterm" style="color:var(--pu)"><span class="vdot" style="background:var(--pu)"></span>"Minha mãe tem esse negócio..."</div>
+        <div class="vdef">Uma das tendências mais poderosas do TikTok BR em 2025-2026: filhos promovendo o negócio dos pais com vídeo emocional — <em>"Minha mãe tem esse negócio, se quiser ver / testar / ajudar..."</em> O vídeo mostra o produto, conta a história, pede ajuda. Alcance orgânico massivo e conversão real. Zero produção, máximo de autenticidade. É o ROI Emocional (indicador 3 do TikTok What's Next 2026) em ação pura.</div>
+        <div class="vex">"Minha mãe faz bolo, se quiser encomendar..." "Meu pai tem uma oficina, se quiser indicar..."</div>
+        <div class="vsource">↗ <a href="https://ads.tiktok.com/business/pt-BR/next" target="_blank">TikTok What's Next 2026 — ROI Emocional</a> · tendência orgânica BR 2025-2026</div>
+      </div>
+
+      <div class="vcard move">
+        <span class="vbadge b-move">movimento</span>
+        <div class="vterm" style="color:var(--pu)"><span class="vdot" style="background:var(--pu)"></span>Era de... / Modo Pinterest</div>
+        <div class="vdef"><strong>Era de...</strong>: anunciar nova fase da vida como álbum — vem da Eras Tour da Taylor Swift (2023-2024). Cada "era" tem estética, comportamento e identidade próprias. Diferente de "fase" porque implica intencionalidade e orgulho. <strong>Modo Pinterest</strong>: do single da Anitta (mar/2026) — estar numa fase em que a própria vida parece um painel de inspiração visual, tudo esteticamente cuidado.</div>
+        <div class="vex">"Entrei na minha era financeira." "Entrei em modo Pinterest." Legenda padrão de lifestyle.</div>
+        <div class="vsource">↗ Eras Tour — Taylor Swift (2023-2024) · <a href="https://g1.globo.com/busca/?q=anitta+pinterest+2026" target="_blank">G1 — Anitta "Pinterest", mar/2026</a></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- MORNO -->
+  <div class="vocab-tier f">
+    <div class="tier-header">
+      <span class="tier-dot" style="background:var(--am)"></span>
+      <span class="tier-name" style="color:var(--am)">Termos Atuais</span>
+      <span class="tier-sub">relevantes, crescimento constante, sem o hype imediato</span>
+    </div>
+    <div class="vocab-grid">
+
+      <div class="vcard warm">
+        <span class="vbadge b-warm">em alta</span>
+        <div class="vterm" style="color:var(--am)"><span class="vdot" style="background:var(--am)"></span>Ozempic / Mounjaro / Ozempic face</div>
+        <div class="vdef"><strong>Ozempic</strong> (semaglutida) e <strong>Mounjaro</strong> (tirzepatida) são injeções semanais para diabetes e obesidade, usadas em massa fora da indicação oficial para emagrecimento estético. R$800–R$1.800/mês. O mercado cresceu 82% no Brasil em 2025 e vale R$9-10bi. <strong>Ozempic face</strong>: a perda rápida de gordura facial envelhece o rosto — virou debate de dermatologia e comentário de internet ao mesmo tempo.</div>
+        <div class="vex">"Ela tá na caneta." "Ozempic face demais nessa foto."</div>
+        <div class="vsource">↗ <a href="https://exame.com/ciencia/creatina-de-favorita-dos-marombeiros-ao-suplemento-queridinho-das-mulheres/" target="_blank">Exame — mercado de emagrecimento BR</a></div>
+      </div>
+
+      <div class="vcard warm">
+        <span class="vbadge b-warm">em alta</span>
+        <div class="vterm" style="color:var(--am)"><span class="vdot" style="background:var(--am)"></span>Atrofia cognitiva / AI-first</div>
+        <div class="vdef"><strong>Atrofia cognitiva</strong>: medo de que o uso constante de IA reduza a capacidade de pensar sem ela. Debate aberto em fóruns profissionais brasileiros. <strong>AI-first</strong>: declaração corporativa que o consumidor lê como "vão demitir todo mundo" — o Duolingo sofreu cancelamento massivo após anunciar isso em 2025.</div>
+        <div class="vex">"Tô com atrofia cognitiva — não consigo escrever sem o GPT." "A empresa virou AI-first." Leitura: cuidado.</div>
+        <div class="vsource">↗ <a href="https://tecnoblog.net/?s=duolingo+ia" target="_blank">Tecnoblog — Duolingo AI-first cancelamento, 2025</a></div>
+      </div>
+
+      <div class="vcard warm">
+        <span class="vbadge b-warm">em alta</span>
+        <div class="vterm" style="color:var(--am)"><span class="vdot" style="background:var(--am)"></span>Clip-culture / Podcast em clipes</div>
+        <div class="vdef">Cada episódio de podcast de 2-3 horas gera 20-40 clipes curtos para TikTok, Reels e YouTube Shorts. O clipe viral é o trailer que leva ao original. O Pod Pah (11M de inscritos no YouTube) construiu o maior podcast do Brasil com esse modelo. A maioria das pessoas conhece os podcasts pelos clipes, não pelos episódios completos.</div>
+        <div class="vex">"Vi o clipe no TikTok e fui assistir o episódio inteiro."</div>
+        <div class="vsource">↗ <a href="https://www.youtube.com/@podpah" target="_blank">YouTube @podpah — 11M inscritos</a> · <a href="https://newsroom.spotify.com/" target="_blank">Spotify Newsroom BR</a></div>
+      </div>
+
+      <div class="vcard warm">
+        <span class="vbadge b-warm">em alta</span>
+        <div class="vterm" style="color:var(--am)"><span class="vdot" style="background:var(--am)"></span>Debí tirar más fotos / Modo Pinterest</div>
+        <div class="vdef"><strong>"Debí tirar más fotos"</strong>: frase do álbum de Bad Bunny (jan/2025) — "Devia ter tirado mais fotos." Legenda automática para qualquer memória boa que passou rápido. <strong>Modo Pinterest</strong>: do single da Anitta (mar/2026) — estar numa fase esteticamente cuidada, como se a própria vida fosse um painel de inspiração.</div>
+        <div class="vex">"Aquela viagem — debí tirar más fotos." "Entrei em modo Pinterest."</div>
+        <div class="vsource">↗ Bad Bunny — Grammy 2026 · <a href="https://g1.globo.com/busca/?q=anitta+pinterest+2026" target="_blank">G1 — Anitta "Pinterest", mar/2026</a></div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+</section>
+
+<!-- ══ GOOGLE TRENDS 4 SEMANAS ══ -->
+<section id="s-trends">
+<div class="w">
+  <div class="ey f">Google Trends Brasil</div>
+  <div class="thead"><div>
+    <div class="tag tg f d1">Google Trends · BR · 3 semanas</div>
+    <h2 class="ttitle f d2">O que o Brasil<br>buscou no Google.</h2>
+    <p class="tsub f d3">Assuntos mais pesquisados no Google Brasil nas últimas 3 semanas. Fonte: <a href="https://trends.google.com.br/trending?geo=BR" target="_blank" style="color:var(--g)">trends.google.com.br/trending ↗</a></p>
+  </div><div class="tnum f">🔍</div></div>
+  <div class="week-tabs f d1">
+    <button class="wtab on" onclick="showWeek('g1',this)">Esta semana — 01/abr</button>
+    <button class="wtab" onclick="showWeek('g2',this)">Semana passada — 31/mar</button>
+    <button class="wtab" onclick="showWeek('g3',this)">Retrasada — 24/mar</button>
+  </div>
+  <div class="wpanel on" id="g1">
+    <div class="tgrid f">
+      <div class="tcard"><div class="trank" style="color:var(--g)">1</div><div><div class="ttopic">BBB 26 — paredão, eliminação</div><div class="tctx">Reality em reta final. Buscas por quem sai, parcial e ao vivo toda semana.</div></div></div>
+      <div class="tcard"><div class="trank" style="color:var(--g)">2</div><div><div class="ttopic">Brasil x Croácia — onde assistir, placar</div><div class="tctx">Amistoso pré-Copa gerou busca por transmissão e resultado em tempo real.</div></div></div>
+      <div class="tcard"><div class="trank" style="color:var(--g)">3</div><div><div class="ttopic">Semana Santa 2026 — feriados, datas</div><div class="tctx">Páscoa em abril concentra buscas por feriados, viagens e programação de fim de semana longo.</div></div></div>
+      <div class="tcard"><div class="trank" style="color:var(--g)">4</div><div><div class="ttopic">Stranger Things: Histórias de 85</div><div class="tctx">Spin-off estreia em 23/abr. Buscas por data, trailer e personagens crescendo semana a semana.</div></div></div>
+      <div class="tcard"><div class="trank" style="color:var(--g)">5</div><div><div class="ttopic">Copa do Mundo 2026 — grupos, datas, ingressos</div><div class="tctx">Com Copa em junho, busca por tabela e ingressos cresce semana a semana.</div></div></div>
+      <div class="tcard"><div class="trank" style="color:var(--g)">6</div><div><div class="ttopic">Ozempic preço — farmácia, genérico</div><div class="tctx">Após patente expirar em mar/2026, busca por versões nacionais e genéricos explodiu.</div></div></div>
+    </div>
+    <div style="margin-top:10px"><a class="source" href="https://trends.google.com.br/trending?geo=BR&hours=168" target="_blank">↗ Google Trends BR — 01/abr/2026</a></div>
+  </div>
+  <div class="wpanel" id="g2">
+    <div class="tgrid f">
+      <div class="tcard"><div class="trank" style="color:var(--g)">1</div><div><div class="ttopic">Lei da Misoginia — o que é, pena</div><div class="tctx">Aprovação no Senado 67×0 gerou busca massiva: o que muda, quais as penas, o que é misoginia.</div></div></div>
+      <div class="tcard"><div class="trank" style="color:var(--g)">2</div><div><div class="ttopic">BBB 26 — eliminação, paredão</div><div class="tctx">Reality domina buscas semanalmente. Parcial de votos e quem sai nas noites de paredão.</div></div></div>
+      <div class="tcard"><div class="trank" style="color:var(--g)">3</div><div><div class="ttopic">Ditadura Militar 1964 — o que foi</div><div class="tctx">31 de março gera buscas educativas sobre o Golpe — especialmente entre jovens.</div></div></div>
+      <div class="tcard"><div class="trank" style="color:var(--g)">4</div><div><div class="ttopic">Brasil x Croácia — onde assistir</div><div class="tctx">Amistoso pré-Copa gerou busca por transmissão, horário e escalação.</div></div></div>
+      <div class="tcard"><div class="trank" style="color:var(--g)">5</div><div><div class="ttopic">Burnout — sintomas, como tratar</div><div class="tctx">Trending no X reflete em buscas educativas — pessoas querendo nomear o que sentem.</div></div></div>
+      <div class="tcard"><div class="trank" style="color:var(--g)">6</div><div><div class="ttopic">Neymar Copa 2026 — vai ou não vai</div><div class="tctx">Com lista saindo em 18/mai, busca por convocação cresce toda semana.</div></div></div>
+    </div>
+    <div style="margin-top:10px"><a class="source" href="https://trends.google.com.br/trending?geo=BR&hours=168" target="_blank">↗ Google Trends BR — 31/mar/2026</a></div>
+  </div>
+  <div class="wpanel" id="g3">
+    <div class="tgrid f">
+      <div class="tcard"><div class="trank" style="color:var(--g)">1</div><div><div class="ttopic">Lei da Misoginia — o que muda na prática</div><div class="tctx">Aprovação gerou busca educativa massiva. Penas, condutas e o que muda.</div></div></div>
+      <div class="tcard"><div class="trank" style="color:var(--g)">2</div><div><div class="ttopic">Lollapalooza Brasil 2026 — lineup, setlist</div><div class="tctx">Festival de 20-22/mar concentrou buscas por programação e polêmicas.</div></div></div>
+      <div class="tcard"><div class="trank" style="color:var(--g)">3</div><div><div class="ttopic">Selic — taxa atual, impacto no crédito</div><div class="tctx">Decisão do Copom concentra busca por impacto em financiamentos e investimentos.</div></div></div>
+      <div class="tcard"><div class="trank" style="color:var(--g)">4</div><div><div class="ttopic">Chappell Roan — quem é, músicas</div><div class="tctx">Polêmica no Lolla BR gerou busca educativa entre quem não conhecia a artista.</div></div></div>
+      <div class="tcard"><div class="trank" style="color:var(--g)">5</div><div><div class="ttopic">BBB 26 — ao vivo, resultado</div><div class="tctx">Reality com buscas semanais intensas por parcial de votos e eliminação.</div></div></div>
+      <div class="tcard"><div class="trank" style="color:var(--g)">6</div><div><div class="ttopic">Adidas Copa 2026 — tênis, onde comprar</div><div class="tctx">Lançamento Handball Spezial gerou busca por preço, loja e versão brasileira.</div></div></div>
+    </div>
+    <div style="margin-top:10px"><a class="source" href="https://trends.google.com.br/trending?geo=BR&hours=168" target="_blank">↗ Google Trends BR — 24/mar/2026</a></div>
+  </div>
+</div>
+</section>
+
+<!-- ══ X/TWITTER TRENDS ══ -->
+<section id="s-twitter">
+<div class="w">
+  <div class="ey f">X / Twitter Brasil</div>
+  <div class="thead"><div>
+    <div class="tag tb f d1">X/Twitter · BR · 3 semanas</div>
+    <h2 class="ttitle f d2">O que o Brasil<br>falou no Twitter.</h2>
+    <p class="tsub f d3">Tópicos em alta no X/Twitter Brasil nas últimas 3 semanas. Fonte: <a href="https://getdaytrends.com/brazil/" target="_blank" style="color:var(--g)">getdaytrends.com/brazil ↗</a></p>
+  </div><div class="tnum f">🐦</div></div>
+  <div class="week-tabs f d1">
+    <button class="wtab on" onclick="showWeek('t1',this)">Esta semana — 01/abr</button>
+    <button class="wtab" onclick="showWeek('t2',this)">Semana passada — 31/mar</button>
+    <button class="wtab" onclick="showWeek('t3',this)">Retrasada — 24/mar</button>
+  </div>
+  <div class="wpanel on" id="t1">
+    <div class="tgrid f">
+      <div class="tcard"><div class="trank" style="color:var(--bl)">1</div><div><div class="ttopic">#WEWILL_NEVER_GIVEUP_ON_ENHA_7 · ENHYPEN</div><div class="tctx">Comunidade de fãs do ENHYPEN em protesto contra a gravadora HYBE — 18h em trending. Conflito sobre direitos dos artistas.</div></div></div>
+      <div class="tcard"><div class="trank" style="color:var(--bl)">2</div><div><div class="ttopic">#MercadoLivreNoBBB · #batepapobbb</div><div class="tctx">BBB 26 em reta final. Mercado Livre patrocinando ação no programa. O reality ainda domina a atenção nacional.</div></div></div>
+      <div class="tcard"><div class="trank" style="color:var(--bl)">3</div><div><div class="ttopic">#BRAxCRO — Brasil x Croácia</div><div class="tctx">Amistoso pré-Copa 2026. A Croácia eliminou o Brasil nos pênaltis em 2022. Memória coletiva presente. 7h em trending.</div></div></div>
+      <div class="tcard"><div class="trank" style="color:var(--bl)">4</div><div><div class="ttopic">#BTS_2point0 · #BTSNo1onHot100BR</div><div class="tctx">BTS com novo material após ARIRANG. Comunidade BR mobilizando charts na Billboard. Liderança sustentada por semanas.</div></div></div>
+      <div class="tcard"><div class="trank" style="color:var(--bl)">5</div><div><div class="ttopic">#MLBS6Spoilers — Stranger Things spin-off</div><div class="tctx">"Stranger Things: Histórias de 85" estreia em 23/abr. Spoilers vazaram. Comunidade em modo proteção de conteúdo.</div></div></div>
+      <div class="tcard"><div class="trank" style="color:var(--bl)">6</div><div><div class="ttopic">#HourOfOpenHeavens · Semana Santa</div><div class="tctx">Páscoa se aproximando. Mobilização de comunidades evangélicas e cristãs nas redes.</div></div></div>
+    </div>
+    <div style="margin-top:10px"><a class="source" href="https://getdaytrends.com/brazil/2026-04-01/14/" target="_blank">↗ getdaytrends.com/brazil — 01/abr/2026</a></div>
+  </div>
+  <div class="wpanel" id="t2">
+    <div class="tgrid f">
+      <div class="tcard"><div class="trank" style="color:var(--bl)">1</div><div><div class="ttopic">BTS Top Artists / #BTSNo1onHot100BR</div><div class="tctx">BTS conquistou o 7º número 1 na Billboard Hot 100 — recorde histórico. Ativismo cultural organizado, não fandom passivo.</div></div></div>
+      <div class="tcard"><div class="trank" style="color:var(--bl)">2</div><div><div class="ttopic">#BBB26 / Ana Paula / rala cowboy</div><div class="tctx">Ana Paula com 72% de favoritismo. "rala cowboy" virou meme de retribuição poética.</div></div></div>
+      <div class="tcard"><div class="trank" style="color:var(--bl)">3</div><div><div class="ttopic">#CreaoAI — 10h em trending</div><div class="tctx">Hashtag orgânica — "criação" + "IA". 10h seguidas em trending. A internet BR nomeando a tensão com autoria.</div></div></div>
+      <div class="tcard"><div class="trank" style="color:var(--bl)">4</div><div><div class="ttopic">DITADURA NUNCA MAIS</div><div class="tctx">31 de março — aniversário do Golpe de 1964. Com julgamento de Bolsonaro em andamento, o peso é diferente.</div></div></div>
+      <div class="tcard"><div class="trank" style="color:var(--bl)">5</div><div><div class="ttopic">Burnout — trending orgânico</div><div class="tctx">Trending sem evento-gatilho. Burnout virou vocabulário cotidiano em 2026.</div></div></div>
+      <div class="tcard"><div class="trank" style="color:var(--bl)">6</div><div><div class="ttopic">Claude Code / Anthropic</div><div class="tctx">Ferramenta de IA para código viralizou entre devs brasileiros. Brasil aderindo antes da curva global.</div></div></div>
+    </div>
+    <div style="margin-top:10px"><a class="source" href="https://getdaytrends.com/brazil/2026-03-31/14/" target="_blank">↗ getdaytrends.com/brazil — 31/mar/2026</a></div>
+  </div>
+  <div class="wpanel" id="t3">
+    <div class="tgrid f">
+      <div class="tcard"><div class="trank" style="color:var(--bl)">1</div><div><div class="ttopic">Lei da Misoginia · Senado 67×0</div><div class="tctx">PL 896/2023 aprovado. Misoginia equiparada ao racismo. Trending junto com Nikolas Ferreira e o caso Marina Sena.</div></div></div>
+      <div class="tcard"><div class="trank" style="color:var(--bl)">2</div><div><div class="ttopic">ANA PAULA MERECE RESPEITO</div><div class="tctx">BBB 26 — ativismo de fãs em defesa de Ana Paula. A energia dos fandoms de K-pop no reality show.</div></div></div>
+      <div class="tcard"><div class="trank" style="color:var(--bl)">3</div><div><div class="ttopic">Talarica — Marina Sena</div><div class="tctx">Tornou-se exemplo em tempo real do que a Lei da Misoginia visa coibir. Aprovação da lei no mesmo dia.</div></div></div>
+      <div class="tcard"><div class="trank" style="color:var(--bl)">4</div><div><div class="ttopic">Pitchfork — fim do jornalismo musical</div><div class="tctx">Demissão em massa após absorção pela GQ. Debate sobre jornalismo cultural independente com repercussão no Brasil.</div></div></div>
+      <div class="tcard"><div class="trank" style="color:var(--bl)">5</div><div><div class="ttopic">Copom / Selic</div><div class="tctx">Reunião do comitê. Cada decisão de juros movimenta a conversa financeira.</div></div></div>
+      <div class="tcard"><div class="trank" style="color:var(--bl)">6</div><div><div class="ttopic">Lucas Pinheiro Braathen — Globo de Cristal</div><div class="tctx">Atleta escolheu representar o Brasil. Brasilcore real: campeões em esportes que não são "nossos".</div></div></div>
+    </div>
+    <div style="margin-top:10px"><a class="source" href="https://getdaytrends.com/brazil/2026-03-24/14/" target="_blank">↗ getdaytrends.com/brazil — 24/mar/2026</a></div>
+  </div>
+</div>
+</section>
+<!-- ══ RADAR CULTURAL ══ -->
+<section id="s-radar">
+<div class="w">
+  <div class="ey f">Radar Cultural</div>
+  <div class="thead">
+    <div>
+      <div class="tag ta f d1">Séries · Shows · Música · Moda · Calendário</div>
+      <h2 class="ttitle f d2">O que ainda tem tração.<br>O que já passou. O que vem aí.</h2>
+      <p class="tsub f d3">Status real de cada item — 🔥 quente, ✓ estável, ❄ esfriando, 📅 calendário futuro. Fontes clicáveis em tudo.</p>
+    </div>
+    <div class="tnum f">📡</div>
+  </div>
+
+  <!-- CALENDÁRIO VISUAL -->
+  <div class="fbox f d1" style="border-color:rgba(79,139,255,.3)">
+    <div class="fbar" style="background:linear-gradient(90deg,var(--bl),transparent)"></div>
+    <div class="flbl" style="color:var(--bl)">Calendário cultural — abr/mai 2026</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;margin-top:4px">
+      <div style="background:rgba(33,194,94,.08);border:1px solid rgba(33,194,94,.2);border-radius:10px;padding:12px 14px">
+        <div style="font-size:10px;font-weight:800;color:var(--g);margin-bottom:4px">02/ABR</div>
+        <div style="font-size:12.5px;font-weight:700">Com Carinho, Kitty T3</div>
+        <div style="font-size:11px;color:var(--muted)">Netflix — público jovem feminino ativo</div>
+      </div>
+      <div style="background:rgba(248,113,113,.08);border:1px solid rgba(248,113,113,.2);border-radius:10px;padding:12px 14px">
+        <div style="font-size:10px;font-weight:800;color:var(--rd);margin-bottom:4px">04/ABR</div>
+        <div style="font-size:12.5px;font-weight:700">Missão: Impossível — Netflix</div>
+        <div style="font-size:11px;color:var(--muted)">Liderança de bilheteria global</div>
+      </div>
+      <div style="background:rgba(167,139,250,.08);border:1px solid rgba(167,139,250,.2);border-radius:10px;padding:12px 14px">
+        <div style="font-size:10px;font-weight:800;color:var(--pu);margin-bottom:4px">11/ABR</div>
+        <div style="font-size:12.5px;font-weight:700">One Piece: Elbaph Arc</div>
+        <div style="font-size:11px;color:var(--muted)">Netflix — comunidade anime massiva no BR</div>
+      </div>
+      <div style="background:rgba(245,166,35,.08);border:1px solid rgba(245,166,35,.2);border-radius:10px;padding:12px 14px">
+        <div style="font-size:10px;font-weight:800;color:var(--am);margin-bottom:4px">16/ABR</div>
+        <div style="font-size:12.5px;font-weight:700">Ronaldinho Gaúcho — Doc Netflix</div>
+        <div style="font-size:11px;color:var(--muted)">Brasilcore puro — Copa 2026 no contexto</div>
+      </div>
+      <div style="background:rgba(33,194,94,.08);border:1px solid rgba(33,194,94,.2);border-radius:10px;padding:12px 14px">
+        <div style="font-size:10px;font-weight:800;color:var(--g);margin-bottom:4px">23/ABR</div>
+        <div style="font-size:12.5px;font-weight:700">Stranger Things: Histórias de 85</div>
+        <div style="font-size:11px;color:var(--muted)">Netflix spin-off — nostalgia 1985 = nostalgia de 2016</div>
+      </div>
+      <div style="background:rgba(255,79,139,.08);border:1px solid rgba(255,79,139,.2);border-radius:10px;padding:12px 14px">
+        <div style="font-size:10px;font-weight:800;color:var(--pk);margin-bottom:4px">ABR-JUN</div>
+        <div style="font-size:12.5px;font-weight:700">Ebony — turnê nacional</div>
+        <div style="font-size:11px;color:var(--muted)">Rap feminino BR em movimento</div>
+      </div>
+      <div style="background:rgba(248,113,113,.08);border:1px solid rgba(248,113,113,.2);border-radius:10px;padding:12px 14px">
+        <div style="font-size:10px;font-weight:800;color:var(--rd);margin-bottom:4px">18/MAI</div>
+        <div style="font-size:12.5px;font-weight:700">Lista da Copa 2026</div>
+        <div style="font-size:11px;color:var(--muted)">O maior debate: Neymar vai ou não vai?</div>
+      </div>
+      <div style="background:rgba(33,194,94,.08);border:1px solid rgba(33,194,94,.2);border-radius:10px;padding:12px 14px">
+        <div style="font-size:10px;font-weight:800;color:var(--g);margin-bottom:4px">JUN 2026</div>
+        <div style="font-size:12.5px;font-weight:700">Copa do Mundo 2026</div>
+        <div style="font-size:11px;color:var(--muted)">EUA/Canadá/México — janela de marca aberta agora</div>
+      </div>
+    </div>
+    <div style="margin-top:10px"><a class="source" href="https://exame.com/casual/lancamentos-da-netflix-em-abril-de-2026-veja-os-filmes-e-as-series/" target="_blank">↗ Exame/Casual — Lançamentos Netflix abril/2026, 01/abr/2026</a></div>
+  </div>
+
+  <div class="cal-grid f d2">
+
+    <div class="rcard">
+      <div class="rtype" style="color:var(--pu)">Série · HBO · em produção</div>
+      <div class="rtitle">Euphoria — Temporada 3</div>
+      <span class="rstatus rs-hot">🔥 trailer 100M views em 2 dias</span>
+      <div class="rdesc">O trailer bateu 100M de views em 2 dias — recorde da HBO. Elenco voltou crescido. Eric Dane aparece em seu último papel antes de falecer. A estética Euphoria — purpurina, delineador maximalista, glitter — ainda formata maquiagem e moda no TikTok BR. Com o elenco crescido, fala com quem tinha 16 anos na estreia e hoje tem 22-24, com renda própria.</div>
+      <div class="rhook" style="color:var(--pu)">A série como sistema de referência visual — cada cena vira tutorial antes de estrear</div>
+      <div style="margin-top:8px"><a class="source" href="https://deadline.com/tag/euphoria/" target="_blank">↗ Deadline — Euphoria S3 trailer, 100M views</a></div>
+    </div>
+
+    <div class="rcard">
+      <div class="rtype" style="color:var(--am)">Série · Netflix · estreou 20/mar</div>
+      <div class="rtitle">Peaky Blinders: O Homem Imortal</div>
+      <span class="rstatus rs-ok">✓ estável</span>
+      <div class="rdesc">Tommy Shelby voltou. O corte de cabelo undercut com navalha nas laterais voltou às barbearias. O detalhe que viralizou: os personagens costuravam lâminas de barbear na aba do chapéu para cortar o rosto do adversário num cabeçada — daí o nome "Peaky Blinders" (o pico do chapéu que cega).</div>
+      <div class="rhook" style="color:var(--am)">O "corte do Tommy" — masculinidade estética com perigo calculado</div>
+    </div>
+
+    
+
+    
+
+    <div class="rcard">
+      <div class="rtype" style="color:var(--cy)">Série · HBO · estreia natal/2026</div>
+      <div class="rtitle">Harry Potter</div>
+      <span class="rstatus rs-soon">📅 em calendário — estreia distante</span>
+      <div class="rdesc">Releitura com elenco novo, 7 temporadas. Trailer de 25/mar quebrou recordes em 24h. A Warner chamou de "o evento da década" — virou meme de promessa exagerada. JK Rowling no centro do debate trans. Conversa ativa mas produto ainda distante.</div>
+      <div class="rhook" style="color:var(--cy)">"O evento da década" = qualquer coisa superestimada antes de acontecer</div>
+    </div>
+
+    <div class="rcard">
+      <div class="rtype" style="color:var(--or)">Esporte · Chegando ao BR</div>
+      <div class="rtitle">Kings League Brasil</div>
+      <span class="rstatus rs-hot">🔥 crescendo</span>
+      <div class="rdesc">Liga criada por Piqué: futebol de 40 minutos, regras modificadas, partidas transmitidas ao vivo no YouTube. Trending em 17/mar no X/BR. O entretenimento consumindo o esporte tradicional. O brasileiro que não assiste futebol tradicional assiste Kings League.</div>
+      <div class="rhook" style="color:var(--or)">Futebol como produto de entretenimento — não como esporte</div>
+    </div>
+
+    <div class="rcard">
+      <div class="rtype" style="color:var(--am)">Moda · Tênis · lançado 24/mar</div>
+      <div class="rtitle">Adidas Handball Spezial × Copa 2026</div>
+      <span class="rstatus rs-hot">🔥 dad-core + Copa = timing duplo</span>
+      <div class="rdesc">Adidas relançou o Handball Spezial — tênis clássico dos anos 1970, ícone do dad-core — com versões inspiradas em seleções: Alemanha, México, Japão, Chile, Peru, Itália, Espanha e Argentina. US$120. Sem versão Brasil confirmada ainda — janela estratégica aberta.</div>
+      <div class="rhook" style="color:var(--am)">O tênis do pai virou objeto de Copa — sem precisar de patrocínio de jogador</div>
+      <div style="margin-top:8px"><a class="source" href="https://exame.com/casual/de-olho-na-copa-do-mundo-adidas-relanca-classico-inspirado-em-paises/" target="_blank">↗ Exame/Casual — Adidas Handball Spezial Copa 2026, 27/mar/2026</a></div>
+    </div>
+
+    
+
+  </div>
+
+  </div></section>
+
+<!-- ══ TIKTOK TRENDS ══ -->
+<section id="s-tiktok-trends">
+<div class="w">
+  <div class="ey f">TikTok BR em Alta</div>
+  <div class="thead">
+    <div>
+      <div class="tag tpu f d1">TikTok · Sons · Hashtags · BR</div>
+      <h2 class="ttitle f d2">O que está vibrando<br>no TikTok brasileiro agora.</h2>
+      <p class="tsub f d3">Sons, hashtags e comportamentos em alta no TikTok BR — baseado no <a href="https://ads.tiktok.com/business/pt-BR/next" target="_blank" style="color:var(--g)">relatório What's Next 2026</a> e análise de conteúdo orgânico. TikTok não expõe trending público como o X/Twitter — os dados abaixo são do relatório oficial da plataforma e observação de conteúdo.</p>
+    </div>
+    <div class="tnum f">🎵</div>
+  </div>
+
+  <div class="fbox f d1">
+    <div class="fbar" style="background:linear-gradient(90deg,var(--pu),var(--pk),transparent)"></div>
+    <div class="flbl" style="color:var(--pu)">Hashtags em alta — dados do relatório oficial TikTok What's Next 2026</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-top:4px">
+      <div style="background:rgba(45,212,191,.06);border:1px solid rgba(45,212,191,.2);border-radius:11px;padding:13px 15px">
+        <div style="font-size:15px;font-weight:900;color:var(--cy)">#lockedin</div>
+        <div style="font-size:11.5px;color:var(--muted);margin-top:4px">648 mil posts · Modo foco — comprometimento público com metas, comunidade de afirmação</div>
+      </div>
+      <div style="background:rgba(45,212,191,.06);border:1px solid rgba(45,212,191,.2);border-radius:11px;padding:13px 15px">
+        <div style="font-size:15px;font-weight:900;color:var(--cy)">#hygiene</div>
+        <div style="font-size:11.5px;color:var(--muted);margin-top:4px">692 mil posts · Autocuidado como ritual de luxo — rotinas simples ressignificadas</div>
+      </div>
+      <div style="background:rgba(45,212,191,.06);border:1px solid rgba(45,212,191,.2);border-radius:11px;padding:13px 15px">
+        <div style="font-size:15px;font-weight:900;color:var(--cy)">#worklife</div>
+        <div style="font-size:11.5px;color:var(--muted);margin-top:4px">5,2 milhões de posts · Realidade do trabalho — volta ao escritório, carreiras fora do padrão</div>
+      </div>
+      <div style="background:rgba(45,212,191,.06);border:1px solid rgba(45,212,191,.2);border-radius:11px;padding:13px 15px">
+        <div style="font-size:15px;font-weight:900;color:var(--cy)">#joblife</div>
+        <div style="font-size:11.5px;color:var(--muted);margin-top:4px">235 mil posts · Evolução do #worklife — carreira na prática, sem filtro</div>
+      </div>
+      <div style="background:rgba(167,139,250,.06);border:1px solid rgba(167,139,250,.2);border-radius:11px;padding:13px 15px">
+        <div style="font-size:15px;font-weight:900;color:var(--pu)">#minhamaetemsenegocio</div>
+        <div style="font-size:11.5px;color:var(--muted);margin-top:4px">Orgânico BR · Filhos promovendo negócio dos pais — ROI emocional máximo, conversão real</div>
+      </div>
+      <div style="background:rgba(167,139,250,.06);border:1px solid rgba(167,139,250,.2);border-radius:11px;padding:13px 15px">
+        <div style="font-size:15px;font-weight:900;color:var(--pu)">#winterarc</div>
+        <div style="font-size:11.5px;color:var(--muted);margin-top:4px">Arco pessoal de transformação — introspecção e mudança com começo, meio e fim</div>
+      </div>
+    </div>
+    <div style="margin-top:14px;font-size:12px;color:var(--muted)">⚠️ O TikTok não expõe trending topics públicos como o X/Twitter. Os dados de volume acima são do <a href="https://ads.tiktok.com/business/pt-BR/next" target="_blank" style="color:var(--g)">relatório oficial TikTok What's Next 2026 ↗</a>. Para monitorar tendências de som em tempo real, use o <a href="https://ads.tiktok.com/business/creativecenter/inspiration/popular/hashtag/pc/pt" target="_blank" style="color:var(--g)">TikTok Creative Center ↗</a>.</div>
+  </div>
+
+  <div class="fbox f d2">
+    <div class="fbar" style="background:linear-gradient(90deg,var(--pk),transparent)"></div>
+    <div class="flbl" style="color:var(--pk)">Comportamentos orgânicos BR em alta — observação de conteúdo</div>
+    <div class="ftxt">
+      <strong>"Minha mãe tem esse negócio, se quiser conhecer..."</strong> — filhos promovendo o negócio dos pais com vídeo emocional. Alcance orgânico massivo, conversão real, zero produção. É o ROI Emocional (indicador 3 do TikTok What's Next 2026) em ação pura.<br><br>
+      <strong>Rotinas de suplemento ("supplement stack")</strong> — empilhar suplementos virou conteúdo. No TikTok, a hashtag <strong>#supplementstack</strong> soma mais de 25 mil publicações. Formato: "arrume-se comigo" ou "o que eu tomo em um dia". (<a href="https://exame.com/casual/vitamina-creatina-e-whey-os-suplementos-sao-mesmo-essenciais-para-a-saude/" target="_blank" style="color:var(--g)">Exame/Casual, 31/mar/2026 ↗</a>)<br><br>
+      <strong>Dad-core e New Balance</strong> — vídeos de look do dia com bermuda jeans larga e tênis de pai. New Balance ficou em trending orgânico no X/BR em 17/mar/2026 sem campanha paga — o TikTok foi o vetor de chegada dessa estética ao Brasil.<br><br>
+      <strong>Clip-culture de podcast</strong> — clipes de Pod Pah, Flow, Inteligência Ltda circulando no TikTok BR e levando para episódios completos no YouTube. Modelo de distribuição dominante.
+    </div>
+    <a class="source" href="https://ads.tiktok.com/business/pt-BR/next" target="_blank">↗ TikTok What's Next 2026 — relatório oficial completo (PT-BR)</a>
+    <a class="source" href="https://ads.tiktok.com/business/creativecenter/inspiration/popular/hashtag/pc/pt" target="_blank" style="margin-left:8px">↗ TikTok Creative Center — hashtags em alta em tempo real</a>
+  </div>
+</div>
+</section>
+
+<!-- ══ T1: BBB26 + ANA PAULA ══ -->
+<section id="s-bbb">
+<div class="w">
+  <div class="ey f">Tendência 01</div>
+  <div class="thead"><div>
+    <div class="tag tp f d1">BBB 26 · Cultura · Merecimento</div>
+    <h2 class="ttitle f d2">Ana Paula: 72% de favoritismo.<br>E a loja que apostou nela antes de entrar.</h2>
+    <p class="tsub f d3">Ana Paula Renault é a favorita absoluta do BBB 26 com 72% de aprovação. A loja que apostou nela antes do confinamento cresceu 60% em vendas e 40 mil seguidores em uma semana — sem gastar um centavo em publicidade.</p>
+  </div><div class="tnum f">01</div></div>
+  <div class="fbox f d1">
+    <div class="fbar" style="background:linear-gradient(90deg,var(--pk),transparent)"></div>
+    <div class="flbl" style="color:var(--pk)">O Fenômeno</div>
+    <div class="ftxt">Ana Paula Renault com <strong>72% de favoritismo</strong> (Votalhada, 26/mar). Jonas saiu chamando ela de <em>"a grande maestra do negócio lá dentro"</em>. A cena da semana: Cowboy a vetou da Festa do Líder pela 4ª vez. O programa escondia um desafio: encontrar chaves de três cadeados. Ela achou. Entrou ao som de "Erva Venenosa" de Rita Lee — e gritou na cara dele: <strong>"Frouxo!"</strong><br><br>
+    A <strong>Nega Lora Acessórios (BH)</strong> — loja que forneceu as bijuterias para o confinamento — registrou <strong>+60% de vendas e +40 mil seguidores em uma semana</strong>. O Boticário não fez nada — e seu perfume árabe usado por ela gerou buscas orgânicas massivas. O maior case de marketing do BBB 26 não veio de uma marca. Veio de uma loja de BH que colocou colar nela antes de entrar.</div>
+    <div class="fquote" style="border-color:var(--pk);color:var(--pk)">"Torcer pela Ana Paula é processar o Cowboy do trabalho, o banco que não aprova, o sistema que não deixa entrar."</div>
+    <a class="source" href="https://www.purepeople.com.br/" target="_blank">↗ PurePeople — BBB 26, mar/2026</a>
+    <a class="source" href="https://votalhada.com.br/" target="_blank" style="margin-left:8px">↗ Votalhada — 72% favoritismo, 26/mar/2026</a>
+  </div>
+  <div class="srow f d3">
+    <div class="sblk"><div class="slbl" style="color:var(--pk)">Leitura Crítica</div>
+    <div class="stxt">O BBB 26 está rodando na lógica de <strong>merecimento versus poder institucional.</strong> O público vota com raiva genuína — elimina quem usa hierarquia para humilhar, protege quem luta de baixo para cima. A emoção do BBB é sempre a emoção que o público não consegue processar na vida real. O case da Nega Lora é o melhor exemplo de que <strong>relevância no momento certo vale mais que patrocínio oficial.</strong></div></div>
+    <div class="sblk"><div class="slbl" style="color:var(--am)">Onde Aplicar</div>
+    <div class="stxt">
+      <div class="channels"><span class="ch ch-social">Social</span><span class="ch ch-trendspace">Trendspace</span><span class="ch ch-casapatrao">Casa do Patrão</span></div>
+      Frame: <em>"sem Cowboy na portaria"</em> — conta que abre, Pix que vai na hora, limite sem aprovação em três etapas. <strong>O app que não veta.</strong> Janela: reta final do BBB, próximas semanas.
+    </div></div>
+  </div>
+</div>
+</section>
+
+<!-- ══ T2: 2026 É O NOVO 2016 ══ -->
+<section id="s-2016">
+<div class="w">
+  <div class="ey f">Tendência 02</div>
+  <div class="thead"><div>
+    <div class="tag tc f d1">Zeitgeist · Nostalgia · Internet</div>
+    <h2 class="ttitle f d2">2026 é o novo 2016.<br>Mas não é saudade — é luto.</h2>
+    <p class="tsub f d3">Uma geração inteira está dizendo "isso é tão 2016" com afeto. Pokémon Go, Vine, One Direction, Tumblr. O que chamam de nostalgia de 2016 é saudade da última vez que acharam que o mundo ia melhorar.</p>
+  </div><div class="tnum f">02</div></div>
+  <div class="fbox f d1">
+    <div class="fbar" style="background:linear-gradient(90deg,var(--cy),transparent)"></div>
+    <div class="flbl" style="color:var(--cy)">O Fenômeno</div>
+    <div class="ftxt">Em 2016: <strong>Pokémon Go</strong> fez vizinhos que nunca tinham se falado sair à rua às 23h juntos. O <strong>Vine</strong> morreu — era a plataforma de criatividade bruta, sem algoritmo forçado. <strong>One Direction</strong> se separou no pico (a morte de Liam Payne em 2024 reativou tudo). O <strong>Tumblr</strong> era o feed cronológico — você postava e seus 40 seguidores viam. O Twitter ainda era bar, não campo de batalha.<br><br>
+    O ciclo de 10 anos da nostalgia online chegou: quem tinha 15-22 anos em 2016 tem 25-32 agora. Post viral no Reddit com <strong>7,5 mil curtidas</strong>: <em>"2016 era um lixo — mas ainda achávamos que era o pior que podia acontecer. Hoje sabemos que não era."</em><br><br>
+    No TikTok: playlists de "2016 sad indie" com dezenas de milhões de plays. Estética 2016 — cores desbotadas, polaroid falsa. A chegada de <strong>Stranger Things: Histórias de 85</strong> (Netflix, 23/abr/2026) vai reativar esse ciclo com força.</div>
+    <div class="fquote" style="border-color:var(--cy);color:var(--cy)">"Não é saudade de 2016 em si. É saudade da última vez que havia esperança de que tudo ia melhorar."</div>
+    <a class="source" href="https://www.reddit.com/r/CuratedTumblr/" target="_blank">↗ Reddit r/CuratedTumblr — post viral, 7,5k curtidas, jul/2025</a>
+    <a class="source" href="https://exame.com/casual/lancamentos-da-netflix-em-abril-de-2026-veja-os-filmes-e-as-series/" target="_blank" style="margin-left:8px">↗ Stranger Things: Histórias de 85 — 23/abr/2026</a>
+  </div>
+  <div class="srow f d2">
+    <div class="sblk"><div class="slbl" style="color:var(--pk)">Leitura Crítica</div>
+    <div class="stxt">Em 2016, o Pix não existia. O PicPay estava crescendo como <strong>a primeira carteira digital de massa do Brasil</strong> — antes de qualquer concorrente. A narrativa <em>"quando tudo era mais simples, a gente já estava aqui"</em> é autêntica. <strong>PicPay como a marca que acompanhou essa geração desde antes do caos.</strong></div></div>
+    <div class="sblk"><div class="slbl" style="color:var(--am)">Onde Aplicar</div>
+    <div class="stxt">
+      <div class="channels"><span class="ch ch-social">Social</span><span class="ch ch-podcast">Podcast</span><span class="ch ch-brand" style="background:rgba(245,166,35,.12);color:var(--am)">Brand</span></div>
+      Nostalgia como credencial de autenticidade. <em>"Antes do boom, antes da concorrência, antes do caos — a gente já estava aqui."</em> Funciona em Millennials (28-35 anos) com renda estabelecida.
+    </div></div>
+  </div>
+</div>
+</section>
+
+<!-- ══ T3: TIKTOK WHAT'S NEXT 2026 ══ -->
+<section id="s-tiktok">
+<div class="w">
+  <div class="ey f">Especial · Tendência 03</div>
+  <div class="thead"><div>
+    <div class="tag to f d1">Relatório Oficial · TikTok · Comportamento</div>
+    <h2 class="ttitle f d2">TikTok What's Next 2026:<br><span style="color:var(--or)">Instinto Único.</span></h2>
+    <p class="tsub f d3">O relatório oficial de tendências do TikTok define 2026 com uma tese central: num mundo saturado de IA, o que é insubstituível é o instinto humano. Três indicadores definem como isso se manifesta.</p>
+  </div><div class="tnum f">03</div></div>
+  <div class="mini3 f d1">
+    <div class="mcard" style="background:rgba(45,212,191,.06);border:1px solid rgba(45,212,191,.2);text-align:center">
+      <div style="font-size:22px;font-weight:900;color:var(--cy);margin-bottom:6px">01</div>
+      <div style="font-size:13px;font-weight:800;margin-bottom:5px">Chá de Realidade</div>
+      <div style="font-size:11.5px;color:var(--muted)">Do escapismo à autenticidade — honestidade como nova estética</div>
+    </div>
+    <div class="mcard" style="background:rgba(79,139,255,.06);border:1px solid rgba(79,139,255,.2);text-align:center">
+      <div style="font-size:22px;font-weight:900;color:var(--bl);margin-bottom:6px">02</div>
+      <div style="font-size:13px;font-weight:800;margin-bottom:5px">Fora do Script</div>
+      <div style="font-size:11.5px;color:var(--muted)">Do consumo passivo à descoberta ativa — curiosidade como moeda</div>
+    </div>
+    <div class="mcard" style="background:rgba(167,139,250,.06);border:1px solid rgba(167,139,250,.2);text-align:center">
+      <div style="font-size:22px;font-weight:900;color:var(--pu);margin-bottom:6px">03</div>
+      <div style="font-size:13px;font-weight:800;margin-bottom:5px">ROI Emocional</div>
+      <div style="font-size:11.5px;color:var(--muted)">De métrica fria a conexão sentida — engajamento emocional tem retorno</div>
+    </div>
+  </div>
+  <div class="fbox f d2">
+    <div class="fbar" style="background:linear-gradient(90deg,var(--cy),transparent)"></div>
+    <div class="flbl" style="color:var(--cy)">01 · Chá de Realidade — a fantasia perdeu força</div>
+    <div class="ftxt">As pessoas estão com saudade do real — honestidade, comunidade e vivências compartilhadas. <strong>#lockedin</strong> (648 mil posts), <strong>#hygiene</strong> (692 mil posts), <strong>#worklife</strong> (5,2 milhões). Em declínio: #delulu, #romanticizingmylife, #digitalescapism. Case Oi Brasil (#HistóriasDeOrgulhoOi): 900+ vídeos da comunidade, 74M visualizações, 34% de todas as views de hashtags do Mês do Orgulho.</div>
+    <div class="fquote" style="border-color:var(--cy);color:var(--cy)">Gancho: transparência radical — mostrar o extrato real, o cashback acumulado, o cofrinho crescendo. O bastidor das finanças, não a propaganda delas.</div>
+    <a class="source" href="https://ads.tiktok.com/business/pt-BR/next" target="_blank">↗ TikTok What's Next 2026 — relatório oficial completo</a>
+  </div>
+  <div class="fbox f d2">
+    <div class="fbar" style="background:linear-gradient(90deg,var(--bl),transparent)"></div>
+    <div class="flbl" style="color:var(--bl)">02 · Fora do Script — curiosidade como moeda</div>
+    <div class="ftxt">49% dos consumidores já usam o TikTok como buscador (Adobe). As pessoas chegam com uma intenção e saem com outra. <strong>#winterarc</strong> (arco pessoal de transformação), <strong>#sundayscaries</strong> (ansiedade de domingo nomeada em público). Quem tem conteúdo genuíno de informação nova ganha de longe.</div>
+    <div class="fquote" style="border-color:var(--bl);color:var(--bl)">Gancho: não "aprenda a investir" — mas "o que você não sabia sobre o cofrinho que rende mais que a poupança". Aparecer na jornada de descoberta, não no topo do funil.</div>
+    <a class="source" href="https://ads.tiktok.com/business/pt-BR/next" target="_blank">↗ TikTok What's Next 2026</a>
+  </div>
+  <div class="fbox f d2">
+    <div class="fbar" style="background:linear-gradient(90deg,var(--pu),transparent)"></div>
+    <div class="flbl" style="color:var(--pu)">03 · ROI Emocional — engajamento emocional tem retorno mensurável</div>
+    <div class="ftxt">60% dos consumidores confiam mais no que criadores dizem sobre marcas do que nas próprias marcas (Edelman, 2025). O conteúdo que emociona tem performance superior. O Cash App usa TikTok para criar momentos emocionais — um pai mandando dinheiro para o filho que foi para a faculdade. A cena de quem recebe o cashback sem esperar.</div>
+    <div class="fquote" style="border-color:var(--pu);color:var(--pu)">Gancho: "Qual foi o Pix mais importante que você mandou?" tem mais potencial emocional do que qualquer campanha de reconhecimento de marca.</div>
+    <a class="source" href="https://ads.tiktok.com/business/pt-BR/next" target="_blank">↗ TikTok What's Next 2026</a>
+    <a class="source" href="https://www.edelman.com/trust" target="_blank" style="margin-left:8px">↗ Edelman Trust Barometer 2025</a>
+  </div>
+  <div class="srow f d3">
+    <div class="sblk"><div class="slbl" style="color:var(--pk)">Trend TikTok: "Minha mãe tem esse negócio..."</div>
+    <div class="stxt">Uma das tendências mais poderosas do TikTok BR em 2025-2026: filhos promovendo o negócio dos pais em vídeos emocionais — <em>"Minha mãe tem esse negócio, se quiser conhecer..."</em> O vídeo mostra o produto, conta a história, pede ajuda. Gera alcance orgânico massivo e conversão real. É o ROI Emocional em ação: produto + história familiar + apelo direto = viral com propósito.</div></div>
+    <div class="sblk"><div class="slbl" style="color:var(--am)">Onde Aplicar</div>
+    <div class="stxt">
+      <div class="channels"><span class="ch ch-social">Social</span><span class="ch ch-trendspace">Trendspace</span><span class="ch ch-kwai">Kwai</span></div>
+      PicPay PJ: criar conteúdo no mesmo formato — <em>"Minha mãe recebe pelo PicPay, se quiser pagar ela..."</em>. É a ponte entre o ROI emocional e o produto. Não precisa de produção — precisa de autenticidade.
+    </div></div>
+  </div>
+</div>
+</section>
+
+<!-- ══ T4: LEI DA MISOGINIA ══ -->
+<section id="s-lei">
+<div class="w">
+  <div class="ey f">Tendência 04 — Aprofundamento</div>
+  <div class="thead"><div>
+    <div class="tag tr f d1">Gênero · Política · Lei · Comportamento</div>
+    <h2 class="ttitle f d2">PL 896/2023. Aprovado 67×0.<br>Misoginia virou crime equiparado ao racismo.</h2>
+    <p class="tsub f d3">Inafiançável, imprescritível, 2 a 5 anos. Aprovado no Senado em 24/mar · Google + X/Twitter. Ainda vai à Câmara. Para marcas: sinal verde para comunicar autonomia — não para declarar vitória.</p>
+  </div><div class="tnum f">04</div></div>
+  <div class="fbox f d1">
+    <div class="fbar" style="background:linear-gradient(90deg,var(--rd),transparent)"></div>
+    <div class="flbl" style="color:var(--rd)">Os dados que motivaram a lei</div>
+    <div class="ftxt"><strong>12 mulheres vítimas de violência por dia.</strong> 4.558 casos em 2025 — <strong>+9% vs. 2024.</strong> 961 estupros — <strong>+56,6% em um ano.</strong> SP: feminicídios cresceram <strong>96% em 4 anos.</strong> 79% das vítimas de violência letal são mulheres negras. Em mar/2026: tenente-coronel da PM indiciado por feminicídio em SP (17/03) e agente da PRF que matou a namorada em Vitória (23/03).</div>
+    <a class="source" href="https://agenciabrasil.ebc.com.br/direitos-humanos" target="_blank">↗ Agência Brasil — Rede de Observatórios da Segurança, 06/mar/2026</a>
+  </div>
+  <div class="fbox f d2">
+    <div class="fbar" style="background:linear-gradient(90deg,var(--pk),var(--rd),transparent)"></div>
+    <div class="flbl" style="color:var(--pk)">A lei — o que mudou</div>
+    <div class="ftxt">Altera a Lei 7.716/1989 (Lei do Racismo). Definição: <em>"Conduta que exteriorize ódio ou aversão às mulheres."</em> <strong>Antes:</strong> injúria, pena de 2 meses a 1 ano, com fiança. <strong>Depois:</strong> crime de discriminação, <strong>2 a 5 anos + multa, sem fiança e imprescritível</strong> — igual ao racismo. Cobre discurso de ódio na internet, espaço público e comunidades online. <strong>67 votos a favor, 0 contra no Senado. Ainda vai à Câmara.</strong> O placar foi político, não ideológico: votar contra era inviável em ano eleitoral.</div>
+    <a class="source" href="https://www12.senado.leg.br/noticias/ultimas" target="_blank">↗ Agência Senado — aprovação PL 896/2023, 27/mar/2026</a>
+  </div>
+  <div class="srow f d3">
+    <div class="sblk"><div class="slbl" style="color:var(--pk)">Leitura Crítica</div>
+    <div class="stxt">A aprovação é sinal verde para comunicar autonomia — <strong>não para declarar vitória.</strong> O debate real vai aparecer na Câmara. O ecossistema de ódio online (manosphere) existe e cresce — o caminho algorítmico não foi interrompido por nenhuma lei.</div></div>
+    <div class="sblk"><div class="slbl" style="color:var(--am)">Onde Aplicar</div>
+    <div class="stxt">
+      <div class="channels"><span class="ch ch-social">Social</span><span class="ch ch-wfi">WFI</span><span class="ch ch-podcast">Podcast</span></div>
+      Frame econômico: autonomia financeira é o principal fator de proteção para mulheres em situação de violência. <em>"Seu dinheiro, sua decisão"</em> — sem debate político, com produto real.
+    </div></div>
+  </div>
+</div>
+</section>
+
+<!-- ══ T5: RAP FEMININO ══ -->
+<section id="s-rap">
+<div class="w">
+  <div class="ey f">Tendência 05</div>
+  <div class="thead"><div>
+    <div class="tag tg f d1">Música · Gênero · Cultura</div>
+    <h2 class="ttitle f d2">Rap feminino não é subgênero.<br>É força motriz da cena urbana.</h2>
+    <p class="tsub f d3">Karol Conká, Ebony, Duquesa, AJULIACOSTA, Budah, Stefanie. Quase 9 milhões de ouvintes mensais no Spotify. Primeira brasileira no BET Awards. E o Pod Pah entendeu antes de todo mundo por que isso importa.</p>
+  </div><div class="tnum f">05</div></div>
+  <div class="fbox f d1">
+    <div class="fbar" style="background:linear-gradient(90deg,var(--g),var(--cy),transparent)"></div>
+    <div class="flbl" style="color:var(--g)">O Fenômeno</div>
+    <div class="ftxt">Em set/2025, o palco principal do <strong>The Town</strong> abriu com Karol Conká, AJULIACOSTA e Ebony — o mesmo palco que teria Lauryn Hill à noite. Não foi palco secundário. <strong>AJULIACOSTA</strong> (Mogi das Cruzes/SP): <strong>primeira brasileira a ganhar o BET Awards 2025</strong>, categoria artista internacional. <strong>Ebony</strong> (Queimados/RJ): turnê nacional abr-jun/2026. As seis artistas somam quase <strong>9 milhões de ouvintes mensais no Spotify.</strong><br><br>
+    O Pod Pah entendeu o fenômeno antes da mídia mainstream: ao entrevistar artistas como Ebony e Duquesa, o podcast expôs o que esse movimento representa — não só música, mas símbolos de que é possível chegar <strong>sem pedir permissão.</strong> A audiência masculina chegou depois via namoradas e agora sabe todas as letras.</div>
+    <div class="fquote" style="border-color:var(--g);color:var(--g)">"A namorada ouve, vai no show com ela, e quando você vê, o cara sabe cantar todas as músicas." — Ebony, Billboard Brasil, set/2025</div>
+    <a class="source" href="https://billboard.com.br/generos/rap-hip-hop/" target="_blank">↗ Billboard Brasil — set/2025 e dez/2025</a>
+    <a class="source" href="https://bet.com/" target="_blank" style="margin-left:8px">↗ BET Awards 2025 — AJULIACOSTA</a>
+  </div>
+
+  <div class="media-grid f d2">
+    <a class="media-card" href="https://www.youtube.com/results?search_query=Ebony+KM2+clipe+oficial" target="_blank">
+      <div class="media-thumb-placeholder">🎤</div>
+      <div class="media-label"><span class="play-icon">▶</span><span>Ebony — KM2 · buscar no YouTube</span></div>
+    </a>
+    <a class="media-card" href="https://www.youtube.com/results?search_query=AJULIACOSTA+Novo+Testamento+clipe+oficial" target="_blank">
+      <div class="media-thumb-placeholder">🏆</div>
+      <div class="media-label"><span class="play-icon">▶</span><span>AJULIACOSTA — Novo Testamento · YouTube</span></div>
+    </a>
+    <a class="media-card" href="https://www.youtube.com/results?search_query=Karol+Conka+rap+feminino+2025+2026" target="_blank">
+      <div class="media-thumb-placeholder">🎵</div>
+      <div class="media-label"><span class="play-icon">▶</span><span>Karol Conká — YouTube</span></div>
+    </a>
+  </div>
+
+  <div class="srow f d3">
+    <div class="sblk"><div class="slbl" style="color:var(--pk)">Leitura Crítica</div>
+    <div class="stxt">O que diferencia essa geração não é só que chegaram — é que <strong>chegaram sem pedir para existir.</strong> Conecta com a Lei da Misoginia (T4): a música é o campo onde as mulheres já ganharam o debate que a política ainda trava. Marcas que chegam no pico do BET Awards porque "é tendência" recebem -500 de aura imediato. A base é extremamente crítica.</div></div>
+    <div class="sblk"><div class="slbl" style="color:var(--am)">Onde Aplicar</div>
+    <div class="stxt">
+      <div class="channels"><span class="ch ch-podcast">Podcast</span><span class="ch ch-social">Social</span><span class="ch ch-casapatrao">Casa do Patrão</span></div>
+      Parceria com o ecossistema (Boogie Naipe, produtoras, os próprios projetos das artistas) com consistência — não patrocínio de show isolado. Ebony em turnê abr-jun/2026 = janela aberta agora.
+    </div></div>
+  </div>
+</div>
+</section>
+
+<!-- ══ T6: NEYMAR / COPA 2026 ══ -->
+<section id="s-copa">
+<div class="w">
+  <div class="ey f">Tendência 06 — Info + Tendência</div>
+  <div class="thead"><div>
+    <div class="tag tp f d1">Copa 2026 · Identidade · Nostalgia</div>
+    <h2 class="ttitle f d2">A torcida cantou o nome dele.<br>Ele não foi convocado.</h2>
+    <p class="tsub f d3">Brasil perdeu 2x1 para a França em Boston com um homem a mais. A torcida cantou "Neymar" no segundo gol. Neymar vs. Vini Jr. é geracional — e a Copa em junho vai definir qual Brasil queremos ser.</p>
+  </div><div class="tnum f">06</div></div>
+  <div class="fbox f d1">
+    <div class="fbar" style="background:linear-gradient(90deg,var(--pk),transparent)"></div>
+    <div class="flbl" style="color:var(--pk)">O que aconteceu + o que significa</div>
+    <div class="ftxt"><strong>26/mar/2026, Gillette Stadium, Boston.</strong> Brasil 1x2 França. Brasil com um a mais no segundo tempo — e perdeu assim mesmo. Torcida cantou o nome de Neymar. Ancelotti: <em>"Agora temos que falar dos que estão aqui."</em> Casemiro: <em>"O talento de Neymar é irrecusável para qualquer seleção."</em><br><br>
+    Neymar no Santos em 2026: 5 jogos, 3 gols, 2 assistências — "controle de carga". Lista da Copa sai em <strong>18/mai/2026</strong>. Ciclo pós-Copa 2022 contra campeões mundiais: <strong>25% de aproveitamento.</strong> O pedido por Neymar não é saudade de jogador — é saudade de uma era em que o Brasil parecia invencível. <strong>Neymar vs. Vini Jr. é geracional:</strong> quem tem 35+ quer Neymar; quem tem 20-28 quer Vini.</div>
+    <a class="source" href="https://www.cnnbrasil.com.br/esportes/futebol/" target="_blank">↗ CNN Brasil — Brasil x França amistoso, 26-27/mar/2026</a>
+  </div>
+  <div class="srow f d2">
+    <div class="sblk"><div class="slbl" style="color:var(--pk)">Leitura Crítica</div>
+    <div class="stxt">O verde-amarelo é um símbolo em disputa — foi "sequestrado" em 2022 e está em recuperação. Qualquer marca que entrar nesse território precisa de cuidado cirúrgico. A janela de comunicação não é o debate Neymar — é a <strong>diáspora e o Pix entre fronteiras.</strong> 4,5 milhões de brasileiros nos EUA mandando dinheiro para família.</div></div>
+    <div class="sblk"><div class="slbl" style="color:var(--am)">Onde Aplicar</div>
+    <div class="stxt">
+      <div class="channels"><span class="ch ch-social">Social</span><span class="ch ch-perf">Performance</span><span class="ch ch-tvminuto">TV Minuto</span><span class="ch ch-radio">Rádio</span></div>
+      Janela: agora até junho. Frame da diáspora: <em>"a gente está junto mesmo de longe."</em> Frame PJ: <em>"no dia do jogo, o Pix não pode falhar."</em>
+    </div></div>
+  </div>
+</div>
+</section>
+
+<!-- ══ T7: IA BRASIL ══ -->
+<section id="s-ia">
+<div class="w">
+  <div class="ey f">Tendência 07 — Fato Verificado</div>
+  <div class="thead"><div>
+    <div class="tag tpu f d1">IA · Brasil · Dado Verificado</div>
+    <h2 class="ttitle f d2">O Brasil é um dos países <br></h2>
+    <p class="tsub f d3">Top 3 global em adoção de IA generativa — confirmado. E o Duolingo perdeu audiência massiva por dizer que ia "substituir pessoas por IA". A linha é exata: IA como ferramenta, adoramos. IA como demissão, cancelamos.</p>
+  </div><div class="tnum f">07</div></div>
+  <div class="fbox f d1">
+    <div class="fbar" style="background:linear-gradient(90deg,var(--pu),var(--bl),transparent)"></div>
+    <div class="flbl" style="color:var(--pu)">O que é verificado</div>
+    <div class="ftxt"><strong>Salesforce Connected Shoppers Report (2024):</strong> Brasil aparece consistentemente entre os top 3 países em adoção de IA generativa — junto com Índia e Indonésia. Em métricas específicas de uso pessoal e profissional, o Brasil lidera.<br><br>
+    <strong>O que NÃO está confirmado:</strong> "Brasil é o 1º país no mundo" como afirmação absoluta. Depende da métrica. <strong>O dado correto para usar:</strong> <em>"Brasil está entre os países que mais adotam IA generativa no mundo — top 3 global em múltiplas métricas."</em><br><br>
+    <strong>O paradoxo:</strong> o mesmo Brasil que mais adota é onde o Duolingo sofreu cancelamento massivo por declarar ser "AI-first". Adoção entusiasta quando a IA é ferramenta. Cancelamento imediato quando vira substituta de emprego.</div>
+    <a class="source" href="https://www.salesforce.com/br/artificial-intelligence/" target="_blank">↗ Salesforce Connected Shoppers Report 2024</a>
+    <a class="source" href="https://tecnoblog.net/?s=duolingo+ia" target="_blank" style="margin-left:8px">↗ Tecnoblog — Duolingo AI-first cancelamento, 2025</a>
+  </div>
+  <div class="srow f d2">
+    <div class="sblk"><div class="slbl" style="color:var(--pk)">Leitura Crítica</div>
+    <div class="stxt">O brasileiro <strong>não rejeita IA — rejeita desumanização disfarçada de inovação.</strong> IA que amplifica capacidade humana é bem-vinda. IA que substitui pessoa é ameaça. A relação é intensa, não ingênua.</div></div>
+    <div class="sblk"><div class="slbl" style="color:var(--am)">Onde Aplicar</div>
+    <div class="stxt">
+      <div class="channels"><span class="ch ch-social">Social</span><span class="ch ch-perf">Performance</span></div>
+      Frame correto: <em>"IA detectou o golpe antes de você"</em> — proteção ativa, não automação. Frame errado: "somos AI-first" ou qualquer linguagem que sugira substituição humana.
+    </div></div>
+  </div>
+</div>
+</section>
+
+<!-- ══ T8: POD PAH + BRAZILCORE ══ -->
+<section id="s-podpah">
+<div class="w">
+  <div class="ey f">Tendência 08 — Dupla</div>
+  <div class="thead"><div>
+    <div class="tag to f d1">Podcast · Cultura · Identidade Nacional</div>
+    <h2 class="ttitle f d2">Pod Pah tem 11 milhões de inscritos.<br>E o mundo quer ser <span style="color:var(--or)">Brazil</span>.</h2>
+    <p class="tsub f d3">O mesmo fio: o Brasil encontrando linguagem própria sem pedir validação externa. O podcast de 3h porque é o papo de varanda escalado. E o "Z" que não é erro — é postura.</p>
+  </div><div class="tnum f">08</div></div>
+  <div class="fbox f d1">
+    <div class="fbar" style="background:linear-gradient(90deg,var(--or),transparent)"></div>
+    <div class="flbl" style="color:var(--or)">Pod Pah — por que 3 horas virou produto</div>
+    <div class="ftxt">Pod Pah — criado por Phellyx e Igor 3K, estreou em 2020 e chegou a <strong>mais de 11 milhões de inscritos</strong> no YouTube. Brasil é o <strong>3º maior mercado de podcast do mundo</strong> com crescimento de <strong>+120% em video podcast em 2024 vs. 2023.</strong> O formato é o papo de varanda escalado. A cultura dos clipes é o modelo: cada episódio gera 20-40 clipes curtos que viralizam e levam ao original.<br><br>
+    O Pod Pah entendeu o rap feminino antes da mídia mainstream. Ao entrevistar Ebony, Karol Conká e Duquesa, o podcast expôs o que essa revolução representa — e a audiência masculina chegou via esse caminho.</div>
+    <a class="source" href="https://www.youtube.com/@podpah" target="_blank">↗ YouTube @podpah — 11M inscritos</a>
+    <a class="source" href="https://newsroom.spotify.com/" target="_blank" style="margin-left:8px">↗ Spotify Newsroom — podcast no Brasil, crescimento 2024</a>
+  </div>
+  <div class="fbox f d2">
+    <div class="fbar" style="background:linear-gradient(90deg,var(--g),var(--am),transparent)"></div>
+    <div class="flbl" style="color:var(--am)">Brasilcore (S) vs Brazilcore (Z)</div>
+    <div class="ftxt"><strong>Brasilcore (S)</strong> = churrasco de domingo, futebol de pelada, funk de baile, periferia, samba de raiz. O Brasil bruto e sem filtro. <strong>Brazilcore (Z)</strong> = natureza, praias, Carnaval fotogênico, diversidade estilizada, o Brasil que o exterior romanticiza. O "Z" é postura: celebrar a cultura sem precisar defender o Estado. Brasil é o <strong>8º maior mercado de música global</strong> — +14% ao ano.</div>
+    <a class="source" href="https://www.ifpi.org/global-music-report/" target="_blank">↗ IFPI Global Music Report 2025</a>
+  </div>
+  <div class="srow f d3">
+    <div class="sblk"><div class="slbl" style="color:var(--pk)">Leitura Crítica</div>
+    <div class="stxt">Em 2026, o Brasil não está tentando ser americano. Está exportando o que é, para quem quiser. <strong>Brazilcore financeiro existe:</strong> o Pix que o mundo todo quis copiar, o app de pagamentos que nasceu aqui antes de qualquer outra carteira digital de massa.</div></div>
+    <div class="sblk"><div class="slbl" style="color:var(--am)">Onde Aplicar</div>
+    <div class="stxt">
+      <div class="channels"><span class="ch ch-podcast">Podcast</span><span class="ch ch-social">Social</span><span class="ch ch-casapatrao">Casa do Patrão</span><span class="ch ch-radio">Rádio</span></div>
+      Brasilcore (S): performance, produto de massa, classes C/D. Brazilcore (Z): brand building, Copa 2026 diáspora, produto premium. <em>"O Pix que mandou para a mãe no domingo"</em> é Brasilcore. <em>"O Pix que o mundo copiou"</em> é Brazilcore.
+    </div></div>
+  </div>
+</div>
+</section>
+
+<!-- ══ T9: CORPO + SUPLEMENTOS ══ -->
+<section id="s-corpo">
+<div class="w">
+  <div class="ey f">Tendência 09</div>
+  <div class="thead"><div>
+    <div class="tag tg f d1">Comportamento · Corpo · Soberania</div>
+    <h2 class="ttitle f d2">Creatina, Muay Thai, matcha.<br>O corpo virou território de soberania.</h2>
+    <p class="tsub f d3">79% das mulheres brasileiras usam suplemento. 62% querem esporte de combate. Em 2026, suplementos saíram da prateleira de musculação e foram para o supermercado — e a discussão sobre excesso já chegou.</p>
+  </div><div class="tnum f">09</div></div>
+  <div class="fbox f d1">
+    <div class="fbar" style="background:linear-gradient(90deg,var(--g),transparent)"></div>
+    <div class="flbl" style="color:var(--g)">O Fenômeno</div>
+    <div class="ftxt"><strong>37,4% dos brasileiros gastaram mais de R$500 com suplementos no 1º semestre de 2025</strong> (Soldiers Nutrition, 2.735 entrevistados). A creatina saiu da prateleira de musculação e foi para o supermercado. No TikTok, a hashtag <strong>#supplementstack</strong> soma mais de 25 mil publicações. <strong>62% das mulheres querem iniciar esporte de combate em 2026</strong> (Maximum Boxing) — motivação: segurança pessoal, não estética.<br><br>
+    O debate chegou em 2026: influenciadores tomando 20-150 suplementos por dia. Nos EUA, a indústria move US$70bi — sem aprovação prévia da FDA. <em>"É um novo vício que as pessoas desenvolveram"</em> (Mona Sharma, nutricionista de celebridades, Washington Post).</div>
+    <div class="fquote" style="border-color:var(--g);color:var(--g)">"O corpo é o único projeto com resultado previsível quando tudo mais parece fora de controle."</div>
+    <a class="source" href="https://exame.com/casual/vitamina-creatina-e-whey-os-suplementos-sao-mesmo-essenciais-para-a-saude/" target="_blank">↗ Exame/Casual — Suplementos, 31/mar/2026</a>
+    <a class="source" href="https://exame.com/ciencia/creatina-de-favorita-dos-marombeiros-ao-suplemento-queridinho-das-mulheres/" target="_blank" style="margin-left:8px">↗ Exame — Creatina preferida das mulheres</a>
+  </div>
+  <div class="srow f d2">
+    <div class="sblk"><div class="slbl" style="color:var(--pk)">Leitura Crítica</div>
+    <div class="stxt">Creatina, Muay Thai, matcha — todos dialetos da mesma língua: <strong>soberania sobre o que é controlável.</strong> Com futuro financeiro incerto, o corpo virou o único território onde o resultado é previsível. Você coloca proteína → vê resultado. A mesma lógica existe nas finanças — mas nunca teve essa estética.</div></div>
+    <div class="sblk"><div class="slbl" style="color:var(--am)">Onde Aplicar</div>
+    <div class="stxt">
+      <div class="channels"><span class="ch ch-social">Social</span><span class="ch ch-perf">Performance</span><span class="ch ch-podcast">Podcast</span></div>
+      Frame: <em>"cofrinho automático como protocolo financeiro"</em> — você deposita todo mês, vê crescer. Mesmo enquadramento da creatina: resultado previsível com consistência. Não como educação financeira — como rotina de cuidado.
+    </div></div>
+  </div>
+</div>
+</section>
+
+<!-- ══ T10: MOUNJARO / MAGREZA ══ -->
+<section id="s-mounjaro">
+<div class="w">
+  <div class="ey f">Tendência 10</div>
+  <div class="thead"><div>
+    <div class="tag tp f d1">Corpo · Saúde · Consumo · Classe</div>
+    <h2 class="ttitle f d2">Mounjaro, Ozempic e a volta<br>da magreza extrema como status.</h2>
+    <p class="tsub f d3">Mercado de canetas cresceu 82% no Brasil em 2025 — R$9-10 bilhões. A magreza óssea voltou às passarelas. A tensão: soberania pelo esforço (creatina) vs. soberania pela caneta (R$1.500/mês).</p>
+  </div><div class="tnum f">10</div></div>
+  <div class="fbox f d1">
+    <div class="fbar" style="background:linear-gradient(90deg,var(--pk),var(--pu),transparent)"></div>
+    <div class="flbl" style="color:var(--pk)">O Fenômeno</div>
+    <div class="ftxt">Brasil é o <strong>2º maior mercado mundial de medicamentos para obesidade.</strong> Em 2025, cresceu <strong>82%</strong> e movimentou R$9-10 bilhões (NielsenIQ/XP). <strong>Ozempic</strong> (R$800–R$1.200/mês) e <strong>Mounjaro</strong> (R$1.200–R$1.800/mês) — aprovados para diabetes, usados em massa fora da indicação oficial para emagrecimento estético. Apenas <strong>4,6% da população elegível usa</strong> — concentrado em classes A e B.<br><br>
+    ANVISA: <strong>225 casos de pancreatite e 6 mortes</strong> associados ao uso (VigiMed). Parte ligada a uso sem prescrição. A magreza óssea como ideal de beleza voltou às passarelas em 2023 e ao TikTok BR em 2024-2025. <strong>Corpo magro virou produto de assinatura</strong> — R$1.500/mês é mais que o salário mínimo.</div>
+    <div class="fquote" style="border-color:var(--pk);color:var(--pk)">"Antes você ia à academia para ter o corpo que queria. Agora você pergunta qual caneta usar."</div>
+    <a class="source" href="https://exame.com/bussola/medicamentos-usados-como-emagrecedores-podem-representam-9-dos-gastos-com-saude-corporativa/" target="_blank">↗ Exame — mercado emagrecimento BR, dados NielsenIQ/XP</a>
+  </div>
+  <div class="mini2 f d2">
+    <div class="mcard" style="background:rgba(167,139,250,.06);border:1px solid rgba(167,139,250,.2)">
+      <div style="font-size:10px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--pu);margin-bottom:10px">Magreza como privilégio de classe</div>
+      <div style="font-size:13px;color:var(--muted);line-height:1.65">R$1.500/mês = mais que o salário mínimo. A narrativa de "saúde" encobre o dado real: <strong style="color:var(--text)">corpo magro virou produto de assinatura.</strong> A patente da semaglutida expirou em mar/2026 — genéricos chegam, mas ainda não chegaram.</div>
+    </div>
+    <div class="mcard" style="background:rgba(255,79,139,.06);border:1px solid rgba(255,79,139,.2)">
+      <div style="font-size:10px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--pk);margin-bottom:10px">Tensão com a Tendência 09</div>
+      <div style="font-size:13px;color:var(--muted);line-height:1.65">Creatina e Muay Thai = soberania pelo esforço. Caneta = resultado sem processo visível. <strong style="color:var(--text)">Os dois coexistem na mesma geração,</strong> às vezes na mesma pessoa. Essa tensão é o debate central de 2026.</div>
+    </div>
+  </div>
+  <div class="srow f d3">
+    <div class="sblk"><div class="slbl" style="color:var(--pk)">Leitura Crítica</div>
+    <div class="stxt">A volta da magreza extrema foi acelerada pela visibilidade de corpos que mudaram em meses via TikTok — antes e depois em 30 segundos, sem mostrar o processo, o custo ou os efeitos. <strong>O debate sobre isso está apenas começando no Brasil.</strong></div></div>
+    <div class="sblk"><div class="slbl" style="color:var(--am)">Onde Aplicar</div>
+    <div class="stxt">
+      <div class="channels"><span class="ch ch-perf">Performance</span><span class="ch ch-social">Social</span></div>
+      Clínicas de emagrecimento, endocrinologistas, farmácias de manipulação — demanda cresceu 82%. PicPay como app de cobrança desse setor. Cofrinho com meta de tratamento de saúde — produto concreto, não aspiração vaga.
+    </div></div>
+  </div>
+</div>
+</section>
+
+<!-- ══ T11: EFEITO BATOM 2026 ══ -->
+<section id="s-batom">
+<div class="w">
+  <div class="ey f">Tendência 11 — Análise Econômica</div>
+  <div class="thead"><div>
+    <div class="tag ta f d1">Economia · Consumo · Comportamento</div>
+    <h2 class="ttitle f d2">O novo efeito do batom:<br>creatina, matcha e skincare.</h2>
+    <p class="tsub f d3">Em crises, as pessoas cortam no grande e mantêm o pequeno prazer. Em 2026, com a Selic em queda, o "batom" se multiplicou — e virou creatina no supermercado, skincare de farmácia e ingresso de show.</p>
+  </div><div class="tnum f">11</div></div>
+  <div class="fbox f d1">
+    <div class="fbar" style="background:linear-gradient(90deg,var(--pk),transparent)"></div>
+    <div class="flbl" style="color:var(--pk)">O Efeito Batom — origem e atualização</div>
+    <div class="ftxt">
+      A teoria original (confirmada pela Harvard Business School): em crises, as mulheres param de comprar roupas caras mas mantêm o batom — pequeno luxo que mantém a autoestima. Verificado historicamente: vendas de batom subiram durante a Grande Depressão (1929), pós-11 de setembro (2001) e crise de 2008.<br><br>
+      <strong>Em 2026, o efeito do batom se fragmentou em novas categorias:</strong><br><br>
+      <strong>1. Saúde como pequeno luxo:</strong> creatina no supermercado (crescimento 89% em volume), matcha no café da manhã, suplementos como ritual diário. Não é academia cara — é o produto acessível que entrega resultado visível e mensurável. 37,4% dos brasileiros gastaram mais de R$500 com suplementos só no 1º semestre de 2025.<br><br>
+      <strong>2. Experiência rápida em vez de objeto:</strong> ingresso de show, jantar fora uma vez por semana, delivery do restaurante favorito. Com juros caindo (Selic em queda desde 2025), o crédito ficou mais barato e o brasileiro voltou a se dar pequenos prazeres de experiência.<br><br>
+      <strong>3. Cuidado com a pele:</strong> skincare com ativos (ácido hialurônico, vitamina C, retinol) saiu do nicho e foi para o supermercado e farmácia. É o batom de 2026 — produto de baixo ticket, uso diário, resultado visível que resiste à crise.<br><br>
+      <strong>A relação com a Selic:</strong> quando os juros estão altos, o brasileiro corta no grande (viagem, carro, imóvel) e mantém o pequeno prazer (batom, creatina, skincare). Com a Selic caindo, o "batom" sobe de categoria — de creatina para ingresso de show, de skincare de farmácia para skincare de dermato.
+    </div>
+    <div class="fquote" style="border-color:var(--pk);color:var(--pk)">"O efeito batom de 2026 não é batom. É creatina, matcha e skincare de farmácia. O denominador comum: pequeno luxo com propósito real e resultado visível."</div>
+    <a class="source" href="https://exame.com/casual/vitamina-creatina-e-whey-os-suplementos-sao-mesmo-essenciais-para-a-saude/" target="_blank">↗ Exame/Casual — Suplementos e saúde, 31/mar/2026</a>
+  </div>
+  <div class="srow f d2">
+    <div class="sblk"><div class="slbl" style="color:var(--pk)">Leitura Crítica</div>
+    <div class="stxt">O batom de 2026 tem um traço novo: <strong>ele precisa ter propósito.</strong> A creatina não é só prazer — é resultado mensurável. O matcha não é só bebida — é "energia sem ansiedade". O skincare não é vaidade — é protocolo. O consumidor de 2026 aceita pagar pelo pequeno luxo se ele entregar algo tangível além do prazer em si.</div></div>
+    <div class="sblk"><div class="slbl" style="color:var(--am)">Onde Aplicar</div>
+    <div class="stxt">
+      <div class="channels"><span class="ch ch-social">Social</span><span class="ch ch-perf">Performance</span><span class="ch ch-podcast">Podcast</span></div>
+      <strong>Baixa Renda:</strong> o cashback como fundo secreto do pequeno prazer — a creatina, o matcha, o ingresso. <strong>Alta Renda:</strong> Epic como protocolo financeiro — produto que entrega resultado real todo mês, sem precisar aparecer.
+    </div></div>
+  </div>
+</div>
+</section>
+
+<!-- ══ T12: DAD-CORE + EUPHORIA ══ -->
+<section id="s-dadcore">
+<div class="w">
+  <div class="ey f">Tendência 12 — Moda</div>
+  <div class="thead"><div>
+    <div class="tag ta f d1">Moda · Geração Z · Comportamento</div>
+    <h2 class="ttitle f d2">Dad-core e Euphoria S3.<br>Dois visuais que definem 2026.</h2>
+    <p class="tsub f d3">New Balance trending orgânico no X/BR sem campanha paga. 100M de views no trailer de Euphoria em 2 dias. Dois movimentos opostos na estética — e a mesma lógica: status pelo que você sabe, não pelo que aparece.</p>
+  </div><div class="tnum f">12</div></div>
+  <div class="fbox f d1">
+    <div class="fbar" style="background:linear-gradient(90deg,var(--am),var(--pu),transparent)"></div>
+    <div class="flbl" style="color:var(--am)">Dad-core — o anti-fashion que é fashion</div>
+    <div class="ftxt">A Geração Z está roubando o guarda-roupa dos anos 1990-2000 dos pais. As peças: <strong>bermudas jeans largas</strong> (não skinny, não rasgada), <strong>New Balance 530 ou 9060</strong> em paleta neutra, <strong>camiseta oversized simples</strong>, <strong>meias altas com tênis visíveis</strong>. O look completo diz: "Não estou tentando." O paradoxo: é o look mais curado de todos.<br><br>
+    <strong>New Balance trending orgânico no X/BR em 17/mar · Google + X/Twitter</strong> — sem campanha paga. A <strong>Adidas Handball Spezial</strong> (tênis dos anos 1970, ícone do dad-core) acabou de ganhar versões de Copa 2026. A combinação dad-core + Copa = alcance duplo sem diluir nenhum dos dois públicos.</div>
+    <a class="source" href="https://getdaytrends.com/brazil/2026-03-17/14/" target="_blank">↗ New Balance trending X/BR — 17/mar · Google + X/Twitter (orgânico, sem campanha)</a>
+    <a class="source" href="https://exame.com/casual/de-olho-na-copa-do-mundo-adidas-relanca-classico-inspirado-em-paises/" target="_blank" style="margin-left:8px">↗ Adidas Handball Spezial × Copa 2026 — Exame/Casual 27/mar/2026</a>
+  </div>
+  <div class="fbox f d2" style="border-color:rgba(167,139,250,.3)">
+    <div class="fbar" style="background:linear-gradient(90deg,var(--pu),var(--pk),transparent)"></div>
+    <div class="flbl" style="color:var(--pu)">Euphoria S3 — a estética que formata maquiagem</div>
+    <div class="ftxt">Trailer bateu <strong>100M de views em 2 dias</strong> — recorde HBO. Elenco voltou crescido: Rue, Jules, Cassie como adultos jovens. Eric Dane em seu último papel antes de falecer. A estética Euphoria — purpurina, delineador maximalista, glitter corporal — ainda formata tendências de maquiagem no TikTok BR. Com o elenco crescido, fala com quem tinha 16 anos na estreia e hoje tem 22-24, com renda própria e consumo real. Cada cena do trailer já virou tutorial antes de estrear.</div>
+    <a class="source" href="https://deadline.com/tag/euphoria/" target="_blank">↗ Deadline — Euphoria S3 trailer 100M views</a>
+  </div>
+  <div class="srow f d3">
+    <div class="sblk"><div class="slbl" style="color:var(--pk)">Leitura Crítica</div>
+    <div class="stxt">Dad-core e Euphoria são opostos na estética mas têm a mesma lógica de status: <strong>você demonstra quem é pelo que sabe reconhecer, não pelo que aparece.</strong> O New Balance "sem querer" e o glitter milimétrico da Euphoria exigem o mesmo: conhecimento de referência, não dinheiro visível.</div></div>
+    <div class="sblk"><div class="slbl" style="color:var(--am)">Onde Aplicar</div>
+    <div class="stxt">
+      <div class="channels"><span class="ch ch-social">Social</span><span class="ch ch-trendspace">Trendspace</span><span class="ch ch-kwai">Kwai</span></div>
+      Dad-core: <strong>Geração Z urbana (16-26 anos)</strong> — TikTok e Reels, não feed estático. Euphoria: <strong>adultos jovens (20-26 anos)</strong> — maquiagem como produto, lifestyle como narrativa. Janela Euphoria: agora (trailer) até estreia da série.
+    </div></div>
+  </div>
+</div>
+</section>
+
+<!-- ══ CLOSING ══ -->
+<section id="s-close">
+<div class="w">
+  <div class="cgrid">
+    <div>
+      <div class="ey f">Como usar este report</div>
+      <h2 class="ctitle f d1">Dados reais.<br><span style="background:linear-gradient(135deg,var(--g),#0FA449);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Fontes em tudo.</span></h2>
+      <p class="cdesc f d2">4 semanas de trending capturadas. Copa em junho. Euphoria em cartaz. Rap feminino em turnê. Stranger Things em 23/abr. A próxima edição sai em 15 dias.</p>
+      <div class="f d3"><a href="#s0" class="cta-btn">Reler desde o início ↑</a></div>
+    </div>
+    <div class="cmgrid f d2">
+      <div class="cmc"><div class="cn">#CreaoAI</div><div class="cl">10h trending — o Brasil nomeando a tensão com IA</div></div>
+      <div class="cmc"><div class="cn">100M</div><div class="cl">Views em 2 dias — trailer Euphoria S3</div></div>
+      <div class="cmc"><div class="cn">9M</div><div class="cl">Ouvintes mensais — rap feminino BR (Spotify)</div></div>
+      <div class="cmc"><div class="cn">Skincare</div><div class="cl">Novo efeito batom — creatina, matcha e cuidado com a pele</div></div>
+    </div>
+  </div>
+  <div class="hdiv f d3"></div>
+  <div style="text-align:center" class="f d4">
+    <div class="ey" style="justify-content:center;margin-bottom:14px">Metodologia e fontes</div>
+    <p style="max-width:640px;margin:0 auto;color:var(--muted);font-size:12.5px;line-height:1.88">
+      Trending data: <a href="https://getdaytrends.com/brazil/" target="_blank">getdaytrends.com/brazil</a> — capturas de 17/mar, 24/mar, 31/mar e 01/abr/2026 às 14h UTC · TikTok relatório: <a href="https://ads.tiktok.com/business/pt-BR/next" target="_blank">ads.tiktok.com/business/pt-BR/next</a> · Salesforce: <a href="https://www.salesforce.com/br/artificial-intelligence/" target="_blank">Connected Shoppers 2024</a> · Edelman: <a href="https://www.edelman.com/trust" target="_blank">Trust Barometer 2025</a> · IFPI: <a href="https://www.ifpi.org/global-music-report/" target="_blank">Global Music Report 2025</a> · Exame/Casual: <a href="https://exame.com/casual/" target="_blank">exame.com/casual</a> · Billboard BR: <a href="https://billboard.com.br" target="_blank">billboard.com.br</a>
+    </p>
+  </div>
+</div>
+</section>
+
+<footer>PicPay · Report de Tendências · Ed. 01 · Mar/Abr 2026 &nbsp;·&nbsp; Uso interno — Growth Marketing &nbsp;·&nbsp; <a href="https://getdaytrends.com/brazil/" target="_blank">Fonte trending: getdaytrends.com</a> &nbsp;·&nbsp; Próxima edição: Mai 2026</footer>
+
+<script>
+// Dots
+const ss=document.querySelectorAll('section[id]');
+const dc=document.getElementById('dots');
+ss.forEach((_,i)=>{
+  const b=document.createElement('button');
+  b.className='dot'+(i===0?' on':'');
+  b.onclick=()=>ss[i].scrollIntoView({behavior:'smooth'});
+  dc.appendChild(b);
+});
+const ds=document.querySelectorAll('.dot');
+ss.forEach(s=>new IntersectionObserver(e=>{
+  e.forEach(x=>{if(x.isIntersecting){const i=Array.from(ss).indexOf(x.target);ds.forEach(d=>d.classList.remove('on'));if(ds[i])ds[i].classList.add('on');}});
+},{threshold:.3}).observe(s));
+
+// Fade-in
+document.querySelectorAll('.f').forEach(el=>
+  new IntersectionObserver(e=>{
+    e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('on');});
+  },{threshold:.05}).observe(el)
+);
+
+// Keyboard
+let c=0;
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowDown'||e.key===' '){e.preventDefault();c=Math.min(c+1,ss.length-1);ss[c].scrollIntoView({behavior:'smooth'});}
+  if(e.key==='ArrowUp'){e.preventDefault();c=Math.max(c-1,0);ss[c].scrollIntoView({behavior:'smooth'});}
+});
+
+// Week tabs
+function showWeek(id,btn){
+  document.querySelectorAll('.wpanel').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('.wtab').forEach(b=>b.classList.remove('on'));
+  document.getElementById(id).classList.add('on');
+  btn.classList.add('on');
+}
+</script>
+</body>
+</html>
