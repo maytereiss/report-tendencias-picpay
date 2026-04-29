@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
@@ -202,6 +202,15 @@ footer a{color:var(--g);text-decoration:none}
 </style>
 </head>
 <body>
+<div class="password-gate" id="passwordGate">
+  <div class="gate-box">
+    <div class="gate-title">Report PicPay</div>
+    <div class="gate-sub">Edição exclusiva para uso interno<br>Digite a senha para acessar</div>
+    <input type="password" class="gate-input" id="passwordInput" placeholder="Senha..." onkeypress="if(event.key==='Enter') checkPassword()">
+    <button class="gate-btn" onclick="checkPassword()">Acessar</button>
+    <div class="gate-error" id="gateError">Senha incorreta. Tente novamente.</div>
+  </div>
+</div>
 <nav>
   <div class="brand">PicPay <em>· Tendências</em></div>
   <div class="nav-editions">
@@ -216,146 +225,69 @@ footer a{color:var(--g);text-decoration:none}
 <div class="w">
   <div class="hlabel f">Edição 02 · Abr/Mai 2026 · Quinzenal · Uso interno</div>
   <h1 class="htitle f d1">O Brasil mudou<br><span class="hacc">de novo. Leia antes.</span></h1>
-  <p class="hsub f d2">Coachella, Met Gala, Euphoria S3, Novelinhas das Frutas, padel, mascotes com personalidade e o que está bombando no TikTok BR agora.</p>
+  <p class="hsub f d2">Curadoria com critério: só o que tem lastro, relevância cultural verificada e aplicação real para estratégia, produto e conteúdo do PicPay.</p>
   <div class="hrow f d3">
-    <div class="hstat"><span class="hn">14</span><span class="hl">Tendências com timing</span></div>
-    <div class="hstat"><span class="hn">+25</span><span class="hl">Referências verificadas</span></div>
+    <div class="hstat"><span class="hn">6</span><span class="hl">Tendências prioritárias</span></div>
+    <div class="hstat"><span class="hn">12</span><span class="hl">Creators com brand safety</span></div>
     <div class="hstat"><span class="hn">15d</span><span class="hl">Próxima edição</span></div>
   </div>
-
-  <!-- SEGMENTOS LEGEND -->
   <div style="background:var(--card);border:1px solid var(--bord);border-radius:13px;padding:14px 18px;margin-bottom:32px" class="f d3">
-    <div style="font-size:10px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:10px">Segmentos — flags usadas nesta edição</div>
-    <div style="display:flex;flex-wrap:wrap;gap:8px">
-      <span class="sf sf-und">🔵 Underage — conteúdo que alcança menores de idade (até 17 anos)</span>
-      <span class="sf sf-epc">🟡 Epic — assinantes premium</span>
-      <span class="sf sf-pj">🟣 Público PJ — pequenos negócios</span>
-      <span class="sf sf-baixa">🟠 Baixa Renda — classes C/D</span>
-      <span class="sf sf-geral">🟢 Público Geral — todos os perfis</span>
-    </div>
+    <div style="font-size:10px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:10px">Segmentos</div>
+    <div style="display:flex;flex-wrap:wrap;gap:8px"><span class="sf sf-und">🔵 Underage</span><span class="sf sf-epc">🟡 Epic</span><span class="sf sf-pj">🟣 PJ</span><span class="sf sf-baixa">🟠 Baixa Renda</span><span class="sf sf-geral">🟢 Geral</span></div>
   </div>
-
-  <!-- VOCAB -->
   <div class="hdiv f d4"></div>
-  <div class="slabel f d4"><span>Vocab — atualizado para Abr/Mai 2026</span></div>
-
-  <!-- SUPER QUENTE -->
+  <div class="slabel f d4"><span>Glossário — só palavras e gírias</span></div>
   <div class="vocab-tier f d4">
-    <div class="tier-header">
-      <span class="tier-dot" style="background:var(--rd)"></span>
-      <span class="tier-name" style="color:var(--rd)">Super Quente</span>
-      <span class="tier-sub">— termos que explodiram agora</span>
-    </div>
+    <div class="tier-header"><span class="tier-dot" style="background:var(--rd)"></span><span class="tier-name" style="color:var(--rd)">Super Quente</span><span class="tier-sub">— léxico real, com fonte</span></div>
     <div class="vocab-grid">
-
-      <div class="vcard hot">
-        <span class="vbadge b-new">🆕 novo</span>
+      <div class="vcard hot"><span class="vbadge b-new">🆕</span>
         <div class="vterm" style="color:var(--rd)"><span class="vdot" style="background:var(--rd)"></span>Betinha</div>
-        <div class="vdef">Evolução de "-500 de aura" — quando a pessoa não apenas perde pontos de carisma, mas chega ao fundo do poço da compostura. "Ficou betinha" = perdeu toda a presença, virou invisível social. Mais definitivo que -500 de aura: -500 você pode recuperar, betinha é estado permanente.</div>
-        <div class="vex">"Gritou no meio da apresentação: ficou betinha na sala." "Depois daquele e-mail, ficou betinha no trabalho."</div>
-        <div class="vsource">↗ Orgânico TikTok BR e X/Twitter — Abr/2026</div>
+        <div class="vdef">Surgiu no TikTok BR como evolução de "-500 de aura". Quando a pessoa perde completamente a compostura, a presença e se torna invisível socialmente — de forma permanente. "-500 de aura" ainda é recuperável. Betinha não.</div>
+        <div class="vex">"Gritou na reunião. Ficou betinha no trabalho."</div>
+        <div class="vsource">↗ <a href="https://www.tiktok.com/search?q=betinha" target="_blank">TikTok BR — orgânico Abr/2026</a></div>
         <div class="seg-flags"><span class="sf sf-geral">Geral</span></div>
       </div>
-
-      <div class="vcard hot">
-        <span class="vbadge b-new">🆕 novo</span>
-        <div class="vterm" style="color:var(--rd)"><span class="vdot" style="background:var(--rd)"></span>Novelinhas das Frutas</div>
-        <div class="vdef">Tendência orgânica do TikTok BR — vídeos curtos com narrativas dramáticas interpretadas por emojis de frutas (🍓🍋🍇). Cada fruta tem uma personalidade: morango é a protagonista romântica, limão é o amigo dramático, uva é a vilã. É brain rot intencional com storytelling — o público acompanha "séries" de 30 segundos.</div>
-        <div class="vex">"Assisti 2h de novelinhas das frutas." "A 🍓 traiu o 🍋 com a 🍇 — não estava preparada."</div>
-        <div class="vsource">↗ <a href="https://www.tiktok.com/tag/novelinhasdasfrutas" target="_blank">TikTok BR #novelinhasdasfrutas</a> — viral Abr/2026</div>
+    </div>
+  </div>
+  <div class="hdiv" style="margin:56px 0 44px"></div>
+  <div class="slabel"><span>Movimentos em Alta — comportamentos com impacto em consumo</span></div>
+  <div class="vocab-tier">
+    <div class="tier-header"><span class="tier-dot" style="background:var(--pu)"></span><span class="tier-name" style="color:var(--pu)">Comportamentos observáveis</span><span class="tier-sub">— 1 vez aqui, não se repete</span></div>
+    <div class="vocab-grid">
+      <div class="vcard move"><span class="vbadge b-move">💸 Trabalho</span>
+        <div class="vterm" style="color:var(--pu)"><span class="vdot" style="background:var(--pu)"></span>6×1 como pauta de identidade</div>
+        <div class="vdef">A escala 6×1 (6 dias trabalhados por 1 de folga) é legal no Brasil para comércio, serviços e algumas outras categorias (CLT, art. 67). Em 16/abr/2026, "6×1 NÃO É VIDA" entrou em trending no X/BR sem nenhum gatilho específico — sinal de pauta latente e permanente. O tema está ligado ao movimento mais amplo: NR-1 (saúde mental obrigatória nas empresas, desde jan/2025), burnout como palavra do ano e Gen Z tratando dignidade no trabalho como identidade. Marcas que falam de autonomia, tempo livre e ferramentas que "trabalham por você" têm abertura real nessa conversa.</div>
+        <div class="vsource">↗ <a href="https://getdaytrends.com/brazil/" target="_blank">getdaytrends.com — trending 16/abr</a></div>
+        <div class="seg-flags"><span class="sf sf-pj">PJ</span><span class="sf sf-baixa">Baixa Renda</span><span class="sf sf-geral">Geral</span></div>
+      </div>
+      <div class="vcard move"><span class="vbadge b-move">📱 Digital</span>
+        <div class="vterm" style="color:var(--pu)"><span class="vdot" style="background:var(--pu)"></span>Storytelling comprimido</div>
+        <div class="vdef">Novelinhas das Frutas (TikTok BR) mostram que a Gen Z não abandonou narrativa — condensou em 30 segundos, com emojis-personagem, drama e cliffhanger. Cada fruta tem um papel fixo (morango = protagonista, limão = amigo, uva = vilã). A leitura certa não é "as pessoas são menos atentas" — é "as pessoas querem narrativa mais densa em menos tempo". Marca que entrar nesse código com autenticidade tem janela real.</div>
+        <div class="vsource">↗ <a href="https://www.tiktok.com/tag/novelinhasdasfrutas" target="_blank">TikTok #novelinhasdasfrutas</a></div>
         <div class="seg-flags"><span class="sf sf-und">Underage</span><span class="sf sf-geral">Geral</span></div>
       </div>
-
-      
-
-      
-
-      
-
-      <div class="vcard hot">
-        <span class="vbadge b-new">🆕 novo</span>
-        <div class="vterm" style="color:var(--rd)"><span class="vdot" style="background:var(--rd)"></span>Qual é a música mesmo?</div>
-        <div class="vdef">Fenômeno do TikTok BR: vídeos onde alguém toca ou canta uma melodia sem lembrar o nome e a internet resolve em segundos nos comentários. Virou format — as pessoas gravam propositalmente o "não sei o nome" para gerar engajamento. É clip-culture em formato de participação coletiva.</div>
-        <div class="vex">"Qual é a música mesmo? tá na ponta da língua" + humming + 500 comentários respondendo.</div>
-        <div class="vsource">↗ Orgânico TikTok BR — formato viral Abr/2026</div>
+      <div class="vcard move"><span class="vbadge b-move">🏟 Esporte</span>
+        <div class="vterm" style="color:var(--pu)"><span class="vdot" style="background:var(--pu)"></span>Esporte de combate como soberania corporal</div>
+        <div class="vdef">Muay Thai, jiu-jitsu e boxe crescem entre mulheres não como performance esportiva, mas como segurança pessoal e soberania sobre o próprio corpo. A tensão é real: canetas emagrecedoras (Ozempic/Mounjaro) e esporte de combate são duas formas diferentes de buscar controle corporal — e ambas estão crescendo ao mesmo tempo. O impacto em consumo é tangível: roupas, suplementação, aulas, apps de treino, alimentação.</div>
+        <div class="vsource">↗ <a href="https://www.tiktok.com/search?q=muay+thai+feminino" target="_blank">TikTok BR — muay thai feminino</a></div>
         <div class="seg-flags"><span class="sf sf-geral">Geral</span></div>
       </div>
-
-    </div>
-  </div>
-
-  <!-- MOVIMENTOS EM ALTA -->
-  <div class="vocab-tier f">
-    <div class="tier-header">
-      <span class="tier-dot" style="background:var(--pu)"></span>
-      <span class="tier-name" style="color:var(--pu)">Movimentos em Alta</span>
-      <span class="tier-sub">— comportamentos com impacto contínuo</span>
-    </div>
-    <div class="vocab-grid">
-
-      <div class="vcard move">
-        <span class="vbadge b-hot">🔥 agora</span>
-        <div class="vterm" style="color:var(--pu)"><span class="vdot" style="background:var(--pu)"></span>Karol G no Coachella — latinidade como posicionamento</div>
-        <div class="vdef">Karol G se tornou a primeira artista latina headliner do Coachella em 12/abr/2026. A latinidade saiu do nicho e ocupou o palco principal do maior festival do mundo. Seu discurso sobre a comunidade latina sob pressão política nos EUA transformou o show em ato de resistência. Para marcas: latinidade deixou de ser estética e virou posicionamento com consequência real.</div>
-        <div class="vex">Impacto: como a marca se posiciona diante de uma latinidade que é orgulho, não só sotaque?</div>
-        <div class="vsource">↗ <a href="https://billboard.com.br/karol-g-coachella-show-recado-comunidade-latina/" target="_blank">Billboard Brasil — Karol G Coachella, 13/abr/2026</a></div>
-        <div class="seg-flags"><span class="sf sf-geral">Geral</span></div>
-      </div>
-
-      <div class="vcard move">
-        <span class="vbadge b-hot">🔥 agora</span>
-        <div class="vterm" style="color:var(--pu)"><span class="vdot" style="background:var(--pu)"></span>6×1 não é vida — trabalho como pauta de identidade</div>
-        <div class="vdef">Movimento contra a escala de 6 dias por 1 de folga, ainda legal em várias categorias no Brasil. Entrou em trending orgânico no X/BR em 16/abr sem evento-gatilho. Conecta com burnout e IA como libertação — três expressões do mesmo movimento de autonomia. Marcas que posicionam produtos como aliados do tempo próprio se beneficiam diretamente.</div>
-        <div class="vex">Impacto: produtos e serviços que "trabalham por você" ganham relevância nesse contexto.</div>
-        <div class="vsource">↗ <a href="https://getdaytrends.com/brazil/" target="_blank">getdaytrends.com/brazil — trending 16/abr/2026</a></div>
-        <div class="seg-flags"><span class="sf sf-baixa">Baixa Renda</span><span class="sf sf-pj">PJ</span><span class="sf sf-geral">Geral</span></div>
-      </div>
-
-      <div class="vcard move">
-        <span class="vbadge b-hot">🔥 agora</span>
-        <div class="vterm" style="color:var(--pu)"><span class="vdot" style="background:var(--pu)"></span>Euphoria S3 — série como sistema de referência visual</div>
-        <div class="vdef">A terceira temporada de Euphoria estreou na HBO Max em abril/2026. A estética da série (purpurina, glitter, delineador maximalista) já está formatando tutoriais de maquiagem no TikTok BR antes dos episódios irem ao ar. Com o elenco crescido para adultos de 22-24 anos com renda própria, a série influencia diretamente comportamento de compra em beleza, moda e identidade. Tendências do segundo semestre de 2026 serão definidas pelos looks da série.</div>
-        <div class="vex">Impacto: quem antecipa os looks define a tendência. Quem copia depois do pico, perde.</div>
-        <div class="vsource">↗ <a href="https://exame.com/casual/the-boys-euphoria-e-hacks-o-que-assistir-neste-fim-de-semana/" target="_blank">Exame/Casual — Euphoria S3, 10/abr/2026</a></div>
-        <div class="seg-flags"><span class="sf sf-epc">Epic</span><span class="sf sf-geral">Geral</span></div>
-      </div>
-
-      <div class="vcard move">
-        <span class="vbadge b-move">movimento</span>
-        <div class="vterm" style="color:var(--pu)"><span class="vdot" style="background:var(--pu)"></span>Padel como novo território de networking</div>
-        <div class="vdef">O padel cresceu 300% no Brasil entre 2022-2025 e em 2026 virou território de marca. Perfil do jogador: 25-45 anos, renda alta, sociável. O dado mais revelador: a Heineken 0.0 entrou no padel, não a Heineken comum. O ambiente está sendo colonizado pelo "saudável que socializa". É o happy hour ressignificado: presente, conectado e ativo. Não é esporte — é lifestyle de status discreto. Quem entra agora chega cedo; em 2027 estará saturado.</div>
-        <div class="vex">Impacto: janela aberta agora para marcas premium e de bem-estar que quiserem falar com classe A/B.</div>
-        <div class="vsource">↗ <a href="https://www.publicitarioscriativos.com/heineken-0-0-coloca-serena-williams-em-quadra-para-ativar-padel-e-reforcar-conexoes-sociais-da-marca/" target="_blank">publicitarioscriativos.com — Heineken 0.0 + padel</a></div>
-        <div class="seg-flags"><span class="sf sf-epc">Epic</span><span class="sf sf-geral">Geral</span></div>
-      </div>
-
-      <div class="vcard move">
-        <span class="vbadge b-move">movimento</span>
-        <div class="vterm" style="color:var(--pu)"><span class="vdot" style="background:var(--pu)"></span>Mascotes com personalidade — movimento pós-Duolingo</div>
-        <div class="vdef">Depois do case global do Duolingo, marcas brasileiras estão humanizando mascotes com personalidade real. Ton (cão pinscher), Doriana (Mãe Coruja), Pomarola (vampiro). O padrão: mascote com comportamento humano exagerado + humor = engajamento orgânico e memória afetiva com o produto. Muda o comportamento de consumo porque cria relação emocional real — não só transação.</div>
-        <div class="vex">Impacto: marca sem personalidade está perdendo espaço para marca com mascote que tem opinião.</div>
-        <div class="vsource">↗ <a href="https://www.publicitarioscriativos.com/ton-aposta-em-pinscher-para-traduzir-taxas-baixas-com-humor-em-nova-campanha-nacional/" target="_blank">publicitarioscriativos.com — Ton + pinscher</a></div>
+      <div class="vcard move"><span class="vbadge b-move">🛍 Consumo</span>
+        <div class="vterm" style="color:var(--pu)"><span class="vdot" style="background:var(--pu)"></span>Mascotes com personalidade</div>
+        <div class="vdef">Depois do case global do Duolingo (morte da coruja Duo gerou trending em 40 países sem mídia paga), marcas brasileiras aprenderam: mascote com traço humano claro + humor consistente = memória de marca e engajamento orgânico. Ton (pinscher), Pomarola (vampiro) e Doriana (mãe coruja) seguem essa lógica. Não é estética — é personagem com comportamento previsível e reconhecível.</div>
+        <div class="vsource">↗ <a href="https://www.publicitarioscriativos.com/ton-aposta-em-pinscher-para-traduzir-taxas-baixas-com-humor-em-nova-campanha-nacional/" target="_blank">Ton + pinscher — publicitarioscriativos.com</a></div>
         <div class="seg-flags"><span class="sf sf-geral">Geral</span><span class="sf sf-pj">PJ</span></div>
       </div>
-
-
-
-
-
+      <div class="vcard move"><span class="vbadge b-move">🎬 Entretenimento</span>
+        <div class="vterm" style="color:var(--pu)"><span class="vdot" style="background:var(--pu)"></span>Padel como sinal de status e networking</div>
+        <div class="vdef">Padel é um esporte de raquete que mistura tênis e squash, jogado em quadra fechada com paredes de vidro. No Brasil, cresceu 300% entre 2022 e 2025. A Heineken 0.0 (não a comum) entrou nesse território — sinal de que o ambiente é colonizado por "saudável que socializa". O dado mais revelador: é o happy hour ressignificado. Quem entra agora entra cedo. Em 2027 estará saturado.</div>
+        <div class="vsource">↗ <a href="https://www.publicitarioscriativos.com/heineken-0-0-coloca-serena-williams-em-quadra-para-ativar-padel-e-reforcar-conexoes-sociais-da-marca/" target="_blank">Heineken 0.0 + padel — publicitarioscriativos.com</a></div>
+        <div class="seg-flags"><span class="sf sf-epc">Epic</span><span class="sf sf-geral">Geral</span></div>
+      </div>
     </div>
   </div>
-
-  <!-- TERMOS QUE SAÍRAM -->
-  <div style="background:rgba(114,117,140,.06);border:1px solid rgba(114,117,140,.15);border-radius:13px;padding:16px 20px;margin-bottom:32px" class="f">
-    <div style="font-size:10px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:10px">Termos que esfriaram desde a Ed. 01 — retirados do glossário ativo</div>
-    <div style="font-size:12.5px;color:var(--muted);line-height:1.7">
-      <strong style="color:var(--text)">DITADURA NUNCA MAIS</strong> — ainda existe mas saiu do pico (era específico do 31/mar) · 
-      <strong style="color:var(--text)">rala cowboy / Ana Paula BBB</strong> — BBB 26 encerrou · 
-      <strong style="color:var(--text)">#CreaoAI</strong> — hashtag pontual, já não está em trending · 
-      <strong style="color:var(--text)">Talarica</strong> — caso passou
-    </div>
-  </div>
-
+  <div class="hdiv" style="margin:56px 0 44px"></div>
+  <div class="slabel"><span>Tendências prioritárias — só o que PicPay deveria agir agora</span></div>
 </div>
 </section>
 
@@ -1481,6 +1413,7 @@ footer a{color:var(--g);text-decoration:none}
 <footer>PicPay · Report de Tendências · Ed. 02 · Abr/Mai 2026 &nbsp;·&nbsp; Uso interno — Growth Marketing &nbsp;·&nbsp; <a href="ed01.html">← Ed. 01</a> &nbsp;·&nbsp; Próxima edição: 1/mai/2026</footer>
 
 <script>
+function checkPassword() {`r`n  const input = document.getElementById("passwordInput").value;`r`n  const correctPassword = "reportmarketing123";`r`n  const gateError = document.getElementById("gateError");`r`n  if (input === correctPassword) {`r`n    localStorage.setItem("reportAccess", "true");`r`n    document.getElementById("passwordGate").classList.add("hidden");`r`n    document.body.style.overflow = "auto";`r`n  } else {`r`n    gateError.style.display = "block";`r`n    document.getElementById("passwordInput").value = "";`r`n    setTimeout(() => gateError.style.display = "none", 3000);`r`n  }`r`n}`r`n`r`nwindow.addEventListener("DOMContentLoaded", () => {`r`n  const hasAccess = localStorage.getItem("reportAccess");`r`n  if (hasAccess === "true") {`r`n    document.getElementById("passwordGate").classList.add("hidden");`r`n  } else {`r`n    document.body.style.overflow = "hidden";`r`n  }`r`n});
 const ss=document.querySelectorAll('section[id]');
 const dc=document.getElementById('dots');
 ss.forEach((_,i)=>{const b=document.createElement('button');b.className='dot'+(i===0?' on':'');b.onclick=()=>ss[i].scrollIntoView({behavior:'smooth'});dc.appendChild(b);});
@@ -1492,3 +1425,6 @@ let c=0;document.addEventListener('keydown',e=>{if(e.key==='ArrowDown'||e.key===
 </script>
 </body>
 </html>
+
+
+
