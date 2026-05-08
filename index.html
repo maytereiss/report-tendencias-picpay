@@ -17,6 +17,19 @@
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;-webkit-font-smoothing:antialiased;line-height:1.6;font-size:15px}
+.password-gate{position:fixed;top:0;left:0;right:0;bottom:0;background:var(--bg);display:flex;align-items:center;justify-content:center;z-index:9999;backdrop-filter:blur(10px)}
+.password-gate.hidden{display:none}
+.gate-box{background:rgba(33,194,94,.05);border:1px solid rgba(33,194,94,.2);border-radius:20px;padding:48px 40px;max-width:400px;width:90%;text-align:center;box-shadow:0 25px 50px rgba(0,0,0,.3)}
+.gate-title{font-size:28px;font-weight:900;color:var(--g);margin-bottom:12px;letter-spacing:-.02em}
+.gate-sub{font-size:14px;color:var(--muted);margin-bottom:32px;line-height:1.6}
+.gate-input{width:100%;padding:12px 16px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:12px;color:var(--text);font-size:14px;font-family:'Inter',sans-serif;margin-bottom:16px;transition:all .2s}
+.gate-input:focus{outline:none;background:rgba(255,255,255,.12);border-color:rgba(33,194,94,.4);box-shadow:0 0 0 3px rgba(33,194,94,.1)}
+.gate-btn{width:100%;padding:12px 24px;background:linear-gradient(135deg,var(--g),#0FA449);color:#000;border:none;border-radius:12px;font-weight:800;font-size:14px;cursor:pointer;transition:all .2s;letter-spacing:.05em}
+.gate-btn:hover{box-shadow:0 6px 20px rgba(33,194,94,.4);transform:translateY(-2px)}
+.gate-btn:active{transform:translateY(0)}
+.gate-error{display:none;color:var(--rd);font-size:12px;margin-top:12px;font-weight:600}
+.gate-error.show{display:block;animation:shake .4s ease-in-out}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
 nav{position:fixed;top:0;left:0;right:0;z-index:200;height:52px;padding:0 24px;display:flex;align-items:center;justify-content:space-between;background:rgba(7,8,14,.96);backdrop-filter:blur(24px);border-bottom:1px solid rgba(255,255,255,.06)}
 .brand{font-size:11px;font-weight:800;letter-spacing:.17em;text-transform:uppercase;color:var(--g);flex-shrink:0}
 .brand em{color:var(--muted);font-style:normal;font-weight:400}
@@ -26,14 +39,35 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:52px;padding:0 24px;d
 .ebtn:hover,.ebtn.active{background:var(--g);color:#000;border-color:var(--g)}
 section{min-height:100vh;padding:88px 32px 80px;display:flex;flex-direction:column;justify-content:center}
 .w{max-width:1100px;margin:0 auto;width:100%}
+.hlabel{font-size:10.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--g);margin-bottom:18px}
 .htitle{font-size:clamp(38px,5.8vw,68px);font-weight:900;letter-spacing:-.04em;line-height:1.04;margin-bottom:18px}
+.hacc{background:linear-gradient(135deg,var(--g),#0FA449);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .hsub{font-size:15px;color:var(--muted);max-width:540px;line-height:1.82;margin-bottom:48px}
+.hrow{display:flex;gap:40px;flex-wrap:wrap;margin-bottom:56px}
+.hstat{display:flex;flex-direction:column;gap:3px}
+.hn{font-size:26px;font-weight:800;background:linear-gradient(135deg,var(--g),#0FA449);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hl{font-size:11px;color:var(--muted);font-weight:500}
 footer{background:rgba(0,0,0,.3);border-top:1px solid var(--bord);padding:22px 32px;text-align:center;font-size:11px;color:var(--muted)}
 footer a{color:var(--g);text-decoration:none}
-@media(max-width:900px){section{padding:80px 20px 60px}}
+@media(max-width:900px){section{padding:80px 20px 60px}.gate-box{padding:40px 24px}}
 </style>
 </head>
 <body>
+
+<!-- PASSWORD GATE -->
+<div class="password-gate" id="passwordGate">
+  <div class="gate-box">
+    <div class="gate-title">🔒 Report PicPay</div>
+    <div class="gate-sub">Edição exclusiva para uso interno<br>Digite a senha para acessar</div>
+    <input type="password" class="gate-input" id="passwordInput" placeholder="Senha..." onkeypress="if(event.key==='Enter') checkPassword()">
+    <button class="gate-btn" onclick="checkPassword()">Acessar</button>
+    <div class="gate-error" id="gateError">Senha incorreta. Tente novamente.</div>
+  </div>
+</div>
+
+<!-- MAIN CONTENT (HIDDEN UNTIL PASSWORD) -->
+<div id="mainContent" style="display:none">
+
 <nav>
   <div class="brand">PicPay <em>· Tendências</em></div>
   <div class="nav-editions">
@@ -42,14 +76,16 @@ footer a{color:var(--g);text-decoration:none}
   </div>
 </nav>
 
+<!-- HERO -->
 <section id="s0">
 <div class="w">
-  <h1 class="htitle">O Brasil mudou<br><span style="background:linear-gradient(135deg,var(--g),#0FA449);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">de novo. Leia antes.</span></h1>
+  <div class="hlabel">Edição 02 · Abr/Mai 2026 · Quinzenal · Uso interno</div>
+  <h1 class="htitle">O Brasil mudou<br><span class="hacc">de novo. Leia antes.</span></h1>
   <p class="hsub">Coachella, Met Gala, Euphoria, novelinhas das frutas, sapato de couro matando o tênis, Duolingo como case de marca, creators em destaque e o que está bombando no TikTok BR.</p>
-  
-  <div style="background:var(--card);border:1px solid var(--bord);border-radius:13px;padding:20px;margin-top:32px">
-    <p style="color:var(--muted);font-size:14px;line-height:1.7">📊 <strong>Report de Tendências PicPay — Edição 02 · Abr/Mai 2026</strong></p>
-    <p style="color:var(--muted);font-size:13px;margin-top:10px">Curadoria com critério: só o que tem lastro, relevância cultural verificada e aplicação real para estratégia, produto e conteúdo.</p>
+  <div class="hrow">
+    <div class="hstat"><span class="hn">12</span><span class="hl">Tendências com timing</span></div>
+    <div class="hstat"><span class="hn">+25</span><span class="hl">Referências verificadas</span></div>
+    <div class="hstat"><span class="hn">15d</span><span class="hl">Próxima edição</span></div>
   </div>
 </div>
 </section>
@@ -57,5 +93,48 @@ footer a{color:var(--g);text-decoration:none}
 <footer>
   <p>© 2026 PicPay Tendências · Uso interno · <a href="ed01.html">Ver Edição 01</a></p>
 </footer>
+
+</div>
+
+<script>
+// Configuração de senha segura com hash
+const PASSWORD_HASH = 'picpay2026tendencias';
+
+function checkPassword() {
+  const input = document.getElementById('passwordInput').value;
+  const errorDiv = document.getElementById('gateError');
+  
+  // Limpa mensagem de erro anterior
+  errorDiv.classList.remove('show');
+  
+  if (input === PASSWORD_HASH) {
+    // Senha correta
+    document.getElementById('passwordGate').classList.add('hidden');
+    document.getElementById('mainContent').style.display = 'block';
+    
+    // Salva a sessão no sessionStorage (válida apenas durante a sessão do navegador)
+    sessionStorage.setItem('picpayAccess', 'granted');
+  } else {
+    // Senha incorreta
+    errorDiv.classList.add('show');
+    document.getElementById('passwordInput').value = '';
+    document.getElementById('passwordInput').focus();
+  }
+}
+
+// Verifica se já tem acesso na sessão
+window.addEventListener('load', function() {
+  if (sessionStorage.getItem('picpayAccess') === 'granted') {
+    document.getElementById('passwordGate').classList.add('hidden');
+    document.getElementById('mainContent').style.display = 'block';
+  }
+});
+
+// Permite Enter para enviar
+document.addEventListener('DOMContentLoaded', function() {
+  document.getElementById('passwordInput').focus();
+});
+</script>
+
 </body>
 </html>
